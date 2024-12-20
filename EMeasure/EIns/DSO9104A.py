@@ -25,27 +25,29 @@ class DSO9104A(EIns):
 
 
     async def get_waveform(self, channel):
-        xy_info = await self.get_xy_info(channel=channel)
-
         await self.write(':digitize')
         await self.write(':system:header off')
         await self.write(':waveform:byteorder LSBfirst')
         await self.write(':waveform:format ascii')
         await self.write(':waveform:streaming off')
 
-        await self.write(f':waveform:source channel{channel}')
-        resp = await self.query(':waveform:data?')
-        resp = resp.strip().rstrip(',')
-        try:
-            y_data = [xy_info['yOrg'] + float(s) * xy_info['yInc'] for s in resp.split(',')]
-        except ValueError as e:
-            print(f"Failed to convert response to float: {e}")
-            y_data = None
+        channel = channel if isinstance(channel,list) else [channel]
+        y_datas = []
+        for ch in channel:
+            await self.write(f':waveform:source channel{ch}')
+            resp = await self.query(':waveform:data?')
+            resp = resp.strip().rstrip(',')
+            try:
+                y_data = [float(s) for s in resp.split(',')]
+            except ValueError as e:
+                print(f"Failed to convert response to float: {e}")
+                y_data = None
+            y_datas.append(y_data)
 
         await self.write(':waveform:streaming on')
         await self.write(':run')
 
-        return y_data
+        return y_datas
     
 
     async def set_y_offset(self, offset, channel):
