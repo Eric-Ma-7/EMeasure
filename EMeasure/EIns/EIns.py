@@ -6,6 +6,7 @@ class EIns:
         self.resource_name = resource_name
         self.rm = pyvisa.ResourceManager()
         self.device = None
+        self.IDN = None
         self._lock = asyncio.Lock()
     
 
@@ -64,3 +65,8 @@ class EIns:
     async def sleep(self, t):
         async with self._lock:
             await asyncio.sleep(t)
+
+
+    async def get_IDN(self):
+        self.IDN = await self.query('*IDN?')
+        return self.IDN
