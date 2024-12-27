@@ -70,3 +70,11 @@ class EIns:
     async def get_IDN(self):
         self.IDN = await self.query('*IDN?')
         return self.IDN
+    
+
+    def __enter__(self):
+        asyncio.run(self.connect())
+        return self, 
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        asyncio.run(self.disconnect())
