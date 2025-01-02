@@ -1,6 +1,7 @@
 import asyncio
 import pyvisa
 from .EIns import EIns
+from .IPS import MercuryIPS
 
 class ITC(EIns):
 
@@ -157,5 +158,14 @@ class ITC(EIns):
 
     async def get_pressure_set(self):
         return await self._read_value("READ:DEV:DB5.P1:PRES:LOOP:PRST", "mB")
+
+
+
+class IPS(MercuryIPS):
     
+    def __init__(self, resource_name):
+        super().__init__(resource_name)
     
+
+    async def get_magnet_temperature(self):
+        return await self._read_value('READ:DEV:MB1.T1:TEMP:SIG:TEMP','K')
