@@ -1,5 +1,3 @@
-import asyncio
-import pyvisa
 from .EIns import EIns
 
 class DSO9104A(EIns):
@@ -8,13 +6,13 @@ class DSO9104A(EIns):
         super().__init__(resource_name)
     
 
-    async def get_xy_info(self, channel):
-        await self.write(f':waveform:source channel{channel}')
+    def get_xy_info(self, channel):
+        self.write(f':waveform:source channel{channel}')
         xy_info = {
-            'xOrg': await self.query(':waveform:xorigin?'),
-            'xInc': await self.query(':waveform:xincrement?'),
-            'yOrg': await self.query(':waveform:yorigin?'),
-            'yInc': await self.query(':waveform:yincrement?'),
+            'xOrg': self.query(':waveform:xorigin?'),
+            'xInc': self.query(':waveform:xincrement?'),
+            'yOrg': self.query(':waveform:yorigin?'),
+            'yInc': self.query(':waveform:yincrement?'),
         }
         try:
             xy_info = {key: float(val) for key,val in xy_info.items()}
@@ -24,18 +22,18 @@ class DSO9104A(EIns):
             return None
 
 
-    async def get_waveform(self, channel):
-        await self.write(':digitize')
-        await self.write(':system:header off')
-        await self.write(':waveform:byteorder LSBfirst')
-        await self.write(':waveform:format ascii')
-        await self.write(':waveform:streaming off')
+    def get_waveform(self, channel):
+        self.write(':digitize')
+        self.write(':system:header off')
+        self.write(':waveform:byteorder LSBfirst')
+        self.write(':waveform:format ascii')
+        self.write(':waveform:streaming off')
 
         channel = channel if isinstance(channel,list) else [channel]
         y_datas = []
         for ch in channel:
-            await self.write(f':waveform:source channel{ch}')
-            resp = await self.query(':waveform:data?')
+            self.write(f':waveform:source channel{ch}')
+            resp = self.query(':waveform:data?')
             resp = resp.strip().rstrip(',')
             try:
                 y_data = [float(s) for s in resp.split(',')]
@@ -44,26 +42,26 @@ class DSO9104A(EIns):
                 y_data = None
             y_datas.append(y_data)
 
-        await self.write(':waveform:streaming on')
-        await self.write(':run')
+        self.write(':waveform:streaming on')
+        self.write(':run')
 
         return y_datas
     
 
-    async def set_y_offset(self, offset, channel):
-        await self.write(f':channel{channel}:offset {offset}')
+    def set_y_offset(self, offset, channel):
+        self.write(f':channel{channel}:offset {offset}')
     
 
-    async def set_y_scale(self, scale, channel):
-        await self.write(f':channel{channel}:scale {scale}')
+    def set_y_scale(self, scale, channel):
+        self.write(f':channel{channel}:scale {scale}')
     
 
-    async def set_x_range(self, xrange):
+    def set_x_range(self, xrange):
         # xrange is a real number for the horizontal time, in seconds.
         # xrange in [50ps, 200s]
-        await self.write(f':timebase:range {xrange}')
+        self.write(f':timebase:range {xrange}')
     
 
-    async def set_sample_rate(self, fs):
+    def set_sample_rate(self, fs):
         # fs = AUTO | MAX | <rate>
-        await self.write(f':acquire:srate {fs}')
+        self.write(f':acquire:srate {fs}')

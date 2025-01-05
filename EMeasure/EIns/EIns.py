@@ -1,4 +1,4 @@
-import asyncio
+import threading
 import pyvisa
 
 class EIns:
@@ -7,42 +7,40 @@ class EIns:
         self.rm = pyvisa.ResourceManager()
         self.device = None
         self.IDN = None
-        self._lock = asyncio.Lock()
+        self._lock = threading.Lock()
     
 
-    async def connect(self):
-        async with self._lock:
+    def connect(self):
+        with self._lock:
             try:
-                self.device = await asyncio.to_thread(self.rm.open_resource, self.resource_name)
-                # self.device = self.rm.open_resource(self.resource_name)
+                self.device = self.rm.open_resource(self.resource_name)
                 print(f"Connected to {self.resource_name}")
             except Exception as e:
                 print(f"Failed to connect to {self.resource_name}: {e}")
     
 
-    async def disconnect(self):
-        async with self._lock:
+    def disconnect(self):
+        with self._lock:
             if self.device:
-                await asyncio.to_thread(self.device.close)
-                # self.device.close()
+                self.device.close()
                 print(f"Disconnected from {self.resource_name}")
     
 
-    async def write(self, command):
-        async with self._lock:
+    def write(self, command):
+        with self._lock:
             if self.device:
                 try:
-                    await asyncio.to_thread(self.device.write, command)
+                    self.device.write(command)
                     # print(f"Command '{command}' sent to {self.resource_name}")
                 except Exception as e:
                     print(f"Failed to send command '{command}' to {self.resource_name}: {e}")
     
 
-    async def read(self):
-        async with self._lock:
+    def read(self):
+        with self._lock:
             if self.device:
                 try:
-                    response = await asyncio.to_thread(self.device.read)
+                    response = self.device.read()
                     # print(f"Response from {self.resource_name}: {response.strip()}")
                     return response
                 except Exception as e:
@@ -50,31 +48,26 @@ class EIns:
                     return None
     
 
-    async def query(self, command):
-        async with self._lock:
+    def query(self, command):
+        with self._lock:
             if self.device:
                 try:
-                    response = await asyncio.to_thread(self.device.query, command)
+                    response = self.device.query(command)
                     # print(f"Query '{command}' sent to {self.resource_name}, response: {response.strip()}")
                     return response
                 except Exception as e:
                     print(f"Failed to query '{command}' from {self.resource_name}: {e}")
                     return None
-    
-
-    async def sleep(self, t):
-        async with self._lock:
-            await asyncio.sleep(t)
 
 
-    async def get_IDN(self):
-        self.IDN = await self.query('*IDN?')
+    def get_IDN(self):
+        self.IDN = self.query('*IDN?')
         return self.IDN
     
 
     def __enter__(self):
-        asyncio.run(self.connect())
-        return self, 
+        self.connect()
+        return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        asyncio.run(self.disconnect())
+        self.disconnect()

@@ -1,4 +1,3 @@
-import asyncio
 import pyvisa
 import pyvisa.constants
 from .EIns import EIns
@@ -9,7 +8,7 @@ class Triton2016(EIns):
         super().__init__(resource_name)
     
 
-    async def connect(self):
+    def connect(self):
         try:
             self.device = self.rm.open_resource(self.resource_name)
             self.device.set_visa_attribute(pyvisa.constants.VI_ATTR_TERMCHAR, 0xa)
@@ -19,13 +18,13 @@ class Triton2016(EIns):
             print(f"Failed to connect to {self.resource_name}: {e}")
     
 
-    async def disconnect(self):
-        await super().disconnect()
+    def disconnect(self):
+        super().disconnect()
 
     
-    async def get_temperature(self, channel:int):
+    def get_temperature(self, channel:int):
         command = f"READ:DEV:T{channel}:TEMP:SIG:TEMP"
-        response = await self.query(command)
+        response = self.query(command)
         try:
             temperature = response.strip()
             temperature = temperature[len(f"STAT:DEV:T{channel}:TEMP:SIG:TEMP:"):-1]
@@ -35,9 +34,9 @@ class Triton2016(EIns):
             return None
     
 
-    async def get_MCRuO2_temperature(self):
-        return await self.get_temperature(channel=8)
+    def get_MCRuO2_temperature(self):
+        return self.get_temperature(channel=8)
     
 
-    async def get_Magnet_temperature(self):
-        return await self.get_temperature(channel=13)
+    def get_Magnet_temperature(self):
+        return self.get_temperature(channel=13)
