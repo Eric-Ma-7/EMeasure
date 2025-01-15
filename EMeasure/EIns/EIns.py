@@ -23,6 +23,7 @@ class EIns:
         with self._lock:
             if self.device:
                 self.device.close()
+                self.device = None
                 print(f"Disconnected from {self.resource_name}")
     
 
