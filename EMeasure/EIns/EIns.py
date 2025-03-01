@@ -1,8 +1,12 @@
+from abc import ABC
+
 import threading
 import pyvisa
+import functools
 
-class EIns:
-    def __init__(self, resource_name):
+
+class EIns(ABC):
+    def __init__(self, resource_name: str) -> None:
         self.resource_name = resource_name
         self.rm = pyvisa.ResourceManager()
         self.device = None
@@ -10,7 +14,7 @@ class EIns:
         self._lock = threading.Lock()
     
 
-    def connect(self):
+    def connect(self) -> None:
         with self._lock:
             try:
                 self.device = self.rm.open_resource(self.resource_name)
@@ -19,7 +23,7 @@ class EIns:
                 print(f"Failed to connect to {self.resource_name}: {e}")
     
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         with self._lock:
             if self.device:
                 self.device.close()
@@ -27,7 +31,7 @@ class EIns:
                 print(f"Disconnected from {self.resource_name}")
     
 
-    def write(self, command):
+    def write(self, command: str) -> None:
         with self._lock:
             if self.device:
                 try:
@@ -37,7 +41,7 @@ class EIns:
                     print(f"Failed to send command '{command}' to {self.resource_name}: {e}")
     
 
-    def read(self):
+    def read(self) -> str | None:
         with self._lock:
             if self.device:
                 try:
@@ -49,7 +53,7 @@ class EIns:
                     return None
     
 
-    def query(self, command):
+    def query(self, command) -> str | None:
         with self._lock:
             if self.device:
                 try:
@@ -61,7 +65,7 @@ class EIns:
                     return None
 
 
-    def get_IDN(self):
+    def get_IDN(self) -> str | None:
         self.IDN = self.query('*IDN?')
         return self.IDN
     
