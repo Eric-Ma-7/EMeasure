@@ -22,7 +22,7 @@ class NF5650(EIns):
         selected_data = sum(data_mapping[d.lower()] for d in data if d.lower() in data_mapping)
         if selected_data == 0:
             raise ValueError("At least one of data1, data2, data3, data4 must be specified")
-        command = f'SENS:DATA {1 + selected_data}'
+        command = f'SENS:DATA {selected_data}'
         self.write(command)
 
 
