@@ -7,6 +7,8 @@ import time
 import numpy as np
 
 
+__all__ = ['SCAN_MODE', 'Scanner1D', 'Scanner2D']
+
 
 class SCAN_MODE(StrEnum):
     FORWARD  = auto()
@@ -17,7 +19,7 @@ class SCAN_MODE(StrEnum):
 class ScanTools():
     
     @staticmethod
-    def dict2list(param:dict[list|np.ndarray]) -> list:
+    def dict2list(param:dict[str, list|np.ndarray]) -> list:
         # check the lengthes of every variables are equal
         var_len = [len(val) for key,val in param.items()]
         if len(set(var_len)) > 1:
@@ -46,7 +48,7 @@ class ScanTools():
 class Scanner1D(ABC):
     
     def __init__(self, 
-                 param:dict[list|np.ndarray], 
+                 param:dict[str, list|np.ndarray], 
                  mode:SCAN_MODE=SCAN_MODE.FORWARD) -> None:
         
         super().__init__()
