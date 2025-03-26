@@ -1,4 +1,7 @@
 import pyvisa
+import math
+import time
+
 from .EIns import EIns
 from .IPS import MercuryIPS
 
@@ -168,3 +171,66 @@ class IPS(MercuryIPS):
 
     def get_magnet_temperature(self):
         return self._read_value('READ:DEV:MB1.T1:TEMP:SIG:TEMP','K')
+
+
+
+class RotController(EIns):
+    
+    def __init__(self, resource_name) -> None:
+        super().__init__(resource_name)
+    
+
+    def connect(self) -> None:
+        super().connect()
+        self.device.write_termination = '\r\n'
+        self.device.read_termination = '\r\n'
+        self.device.baud_rate = 115200
+    
+
+    @staticmethod
+    def deg2code(deg:float) -> int:
+        return math.ceil((deg % 360) * 54050 / 360)
+
+
+    @staticmethod
+    def code2deg(code:int) -> float:
+        return float(code) * 360 / 54050
+
+
+    def to_zero(self) -> None:
+        self.write('[z,1,1501]')
+    
+    
+    def to_deg(self, target:float, speed:float=5) -> None:
+        speed_code = RotController.deg2code(speed)
+        target_code = RotController.deg2code(target)
+        self.write(f'[r,0,{speed_code:04d},{target_code:06d}]')
+    
+    
+    def get_deg(self) -> float:
+        return RotController.code2deg(self._get_deg_code())
+    
+
+    def _get_deg_code(self) -> int:
+        self.write('[?]')
+        resp = self.device.read_bytes(12)
+        resp = resp.decode('utf-8')
+        return int(resp[5:-1])
+    
+    
+    def drive_to_deg(self, target:float, speed:float=5) -> None:
+        speed_code = RotController.deg2code(speed)
+        target_code = RotController.deg2code(target)
+
+        current_deg_code = self._get_deg_code()
+        t = abs(target_code - current_deg_code) / speed_code
+        
+        self.write(f'[r,0,{speed_code:04d},{target_code:06d}]')
+        time.sleep(t)
+        
+        for _ in range(10):
+            if target_code == self._get_deg_code():
+                break
+            time.sleep(0.2)
+        else:
+            raise TimeoutError(f'Motor is NOT at the target position. Now position {self._get_deg_code()} deg.')
