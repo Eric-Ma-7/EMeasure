@@ -174,7 +174,7 @@ class IPS(MercuryIPS):
 
 
 
-class RotController(EIns):
+class MotorController(EIns):
     
     def __init__(self, resource_name) -> None:
         super().__init__(resource_name)
