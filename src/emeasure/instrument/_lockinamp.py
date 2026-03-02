@@ -490,7 +490,7 @@ class NF5650(BaseInstrument):
         N = int(np.abs(volt - V_start) / dV) + 1
         v_ramp = np.linspace(V_start, volt, N)
         for v in v_ramp:
-            self.set_auxout1_volt(v_ramp)
+            self.set_auxout1_volt(v)
             time.sleep(dt)
     
     def set_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
@@ -500,7 +500,7 @@ class NF5650(BaseInstrument):
         N = int(np.abs(volt - V_start) / dV) + 1
         v_ramp = np.linspace(V_start, volt, N)
         for v in v_ramp:
-            self.set_auxout2_volt(v_ramp)
+            self.set_auxout2_volt(v)
             time.sleep(dt)
     
     async def aset_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
@@ -510,7 +510,7 @@ class NF5650(BaseInstrument):
         N = int(np.abs(volt - V_start) / dV) + 1
         v_ramp = np.linspace(V_start, volt, N)
         for v in v_ramp:
-            self.set_auxout1_volt(v_ramp)
+            self.set_auxout1_volt(v)
             await asyncio.sleep(dt)
     
     async def aset_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
@@ -520,7 +520,7 @@ class NF5650(BaseInstrument):
         N = int(np.abs(volt - V_start) / dV) + 1
         v_ramp = np.linspace(V_start, volt, N)
         for v in v_ramp:
-            self.set_auxout2_volt(v_ramp)
+            self.set_auxout2_volt(v)
             await asyncio.sleep(dt)
 
 
