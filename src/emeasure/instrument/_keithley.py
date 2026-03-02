@@ -122,23 +122,23 @@ class K2612(BaseInstrument):
         smux = self._ch2smux(channel)
         self.write(f'{smux}.source.rangei = {curr_range}')
     
-    def set_measurement_mode(self, measurement_mode: str, channel: str):
+    def set_sense_mode(self, sense_mode: str, channel: str):
         smux = self._ch2smux(channel)
-        if measurement_mode.lower() == '4-wire':
+        if sense_mode.lower() in {'4-wire', '4w', '4wire', 'remote'}:
             self.write(f'{smux}.sense = {smux}.SENSE_REMOTE')
-        elif measurement_mode.lower() == '2-wire':
+        elif sense_mode.lower() in {'2-wire', '2w', '2wire', 'local'}:
             self.write(f'{smux}.sense = {smux}.SENSE_LOCAL')
         else:
-            raise ValueError("Measurement mode must be '2-wire' or '4-wire'.")
+            raise ValueError("Sense mode must be '2-wire/local' or '4-wire/remote'.")
     
-    def set_mode(self, mode: str, channel: str):
+    def set_source_func(self, src_func: str, channel: str):
         smux = self._ch2smux(channel)
-        if mode.lower() in {'curr', 'i', 'current'}:
+        if src_func.lower() in {'curr', 'i', 'current'}:
             self.write(f'{smux}.source.func = {smux}.OUTPUT_DCAMPS')
-        elif mode.lower() in {'volt', 'v', 'voltage'}:
+        elif src_func.lower() in {'volt', 'v', 'voltage'}:
             self.write(f'{smux}.source.func = {smux}.OUTPUT_DCVOLTS')
         else:
-            raise ValueError("Mode must be 'current/curr/i' or 'voltage/volt/v'.")
+            raise ValueError("Source function must be 'current/curr/i' or 'voltage/volt/v'.")
     
     def set_curr_ramp(self, I_target: float, dI: float, dt: float, channel: str):
         I_now = self.get_curr(channel)
@@ -163,3 +163,90 @@ class K2182(BaseInstrument):
     def fetch(self):
         response = self.query(":fetch?")
         return float(response.strip())
+
+
+class K2400(BaseInstrument):
+    def set_output_on(self, is_on: bool = True):
+        if is_on:
+            self.write(':OUTP ON')
+        else:
+            self.write(':OUTP OFF')
+    
+    # -------------------- SOURCE configurations--------------------
+    def set_source_func(self, src_func: str):
+        if src_func.lower() in {'current', 'curr', 'i'}:
+            self.write(':SOUR:FUNC CURR')
+        elif src_func.lower() in {'voltage', 'volt', 'v'}:
+            self.write(':SOUR:FUNC VOLT')
+        else:
+            raise ValueError(":SOUR:FUNC must be 'curret/curr/i' or 'voltage/volt/v'.")
+    
+    def set_volt_range(self, vrange: float):
+        if vrange < -210 or vrange > 210:
+            raise ValueError(':SOUR:VOLT:RANG must be in [-210, 210] V.')
+        self.write(f':SOUR:VOLT:RANG {vrange}')
+    
+    def set_curr_range(self, irange:float):
+        if irange < -1.05 or irange > 1.05:
+            raise ValueError(':SOUR:CURR:RANG must be in [-1.05, 1.05] A.')
+        self.write(f':SOUR:CURR:RANGE {irange}')
+    
+    def set_volt_range_auto(self, is_auto: bool = True):
+        if is_auto:
+            self.write(':SOUR:VOLT:RANG:AUTO ON')
+        else:
+            self.write(':SOUR:VOLT:RANG:AUTO OFF')
+    
+    def set_curr_range_auto(self, is_auto: bool = True):
+        if is_auto:
+            self.write(':SOUR:CURR:RANG:AUTO ON')
+        else:
+            self.write(':SOUR:CURR:RANG:AUTO OFF')
+    
+    def set_curr_comp(self, icomp: float):
+        if icomp < -1.05 or icomp > 1.05:
+            raise ValueError(':CURR:PROT must be in [-1.05, 1.05] A.')
+        self.write(f':CURR:PROT {icomp}')
+    
+    def set_volt_comp(self, vcomp: float):
+        if vcomp < -210 or vcomp > 210:
+            raise ValueError(':VOLT:PROT must be in [-210, 210] V.')
+        self.write(f':VOLT:PROT {vcomp}')
+    
+    # -------------------- SENSE subsystem --------------------
+    def set_form_elem(self, items: Sequence[str]):
+        item_list = ','.join(items)
+        self.write(f':FORM:ELEM {item_list}')
+        self.write(':READ?')
+    
+    def read(self) -> tuple[float]:
+        resp = self.query(':READ?').strip()
+        data = [float(s) for s in resp.split(',')]
+        return tuple(data)
+    
+    # -------------------- SOURCE output control --------------------
+    def set_curr(self, curr: float):
+        if curr < -1.05 or curr > 1.05:
+            raise ValueError(':SOUR:CURR must be in [-1.05, 1.05] A.')
+        self.write(f':SOUR:CURR {curr}')
+        
+    def set_volt(self, volt: float):
+        if volt < -210 or volt > 210:
+            raise ValueError(':SOUR:VOLT must be in [-210, 210] V.')
+        self.volt(f':SOUR:VOLT {volt}')
+    
+    def set_curr_ramp(self, curr: float, dI: float, dt: float):
+        i0 = float(self.query(':SOUR:CURR?'))
+        N = int(np.abs((curr -  i0) / dI) + 1)
+        for i in np.linspace(i0, curr, N):
+            self.set_curr(i)
+            time.sleep(dt)
+    
+    def set_volt_ramp(self, volt:float, dV: float, dt: float):
+        v0 = float(self.query(':SOUR:VOLT?'))
+        N = int(np.abs((volt -  v0) / dV) + 1)
+        for v in np.linspace(v0, volt, N):
+            self.set_volt(v)
+            time.sleep(dt)
+    
+    

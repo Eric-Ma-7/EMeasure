@@ -1,8 +1,9 @@
 from ._core import BaseInstrument, _validate_enum_attr
-from typing import Any, Sequence, Iterator, Optional
-from collections import OrderedDict
+from typing import Any, Sequence, Iterator
 import time
+import pyvisa
 import asyncio
+import numpy as np
 
 class LockInError(Exception):
     """Generic lock-in amplifier error."""
@@ -57,6 +58,13 @@ class NF5650(BaseInstrument):
     
     def __init__(self, visa_address, rm = None):
         super().__init__(visa_address, rm)
+    
+    def connect(self):
+        super().connect()
+        visa_type = self._res.get_visa_attribute(pyvisa.constants.VI_ATTR_INTF_TYPE)
+        if visa_type == pyvisa.constants.VI_INTF_TCPIP:
+            self._res.read_termination = "\n"
+            self._res.write_termination = "\n"
     
     # ---------------- :DET ----------------
     def set_detect_mode(self, mode: str) -> None:
@@ -456,6 +464,65 @@ class NF5650(BaseInstrument):
     
     def set_osc_range(self, osc_range: float):
         self.write(f':SOUR:VOLT:RANG {osc_range}')
+        
+    
+    # ---------------- Source5/6 (AUX OUT) Subsystem ----------------
+    def set_auxout1_volt(self, volt: float):
+        if volt > 10.5 or volt < -10.5:
+            raise ValueError('AUX OUT 1 must be in [-10.5, 10.5] V.')
+        self.write(f':SOUR5:VOLT:OFFS {volt}')
+    
+    def set_auxout2_volt(self, volt:float):
+        if volt > 10.5 or volt < -10.5:
+            raise ValueError('AUX OUT 2 must be in [-10.5, 10.5] V.')
+        self.write(f':SOUR6:VOLT:OFFS {volt}')
+    
+    def get_auxout1_volt(self) -> float:
+        return float(self.query(':SOUR5:VOLT:OFFS?'))
+    
+    def get_auxout2_volt(self) -> float:
+        return float(self.query(':SOUR6:VOLT:OFFS?'))
+    
+    def set_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
+        if np.abs(dV) < 0.001:
+            raise ValueError('The resolution for AUX OUT is 0.001 V.')
+        V_start = self.get_auxout1_volt()
+        N = int(np.abs(volt - V_start) / dV) + 1
+        v_ramp = np.linspace(V_start, volt, N)
+        for v in v_ramp:
+            self.set_auxout1_volt(v_ramp)
+            time.sleep(dt)
+    
+    def set_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
+        if np.abs(dV) < 0.001:
+            raise ValueError('The resolution for AUX OUT is 0.001 V.')
+        V_start = self.get_auxout2_volt()
+        N = int(np.abs(volt - V_start) / dV) + 1
+        v_ramp = np.linspace(V_start, volt, N)
+        for v in v_ramp:
+            self.set_auxout2_volt(v_ramp)
+            time.sleep(dt)
+    
+    async def aset_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
+        if np.abs(dV) < 0.001:
+            raise ValueError('The resolution for AUX OUT is 0.001 V.')
+        V_start = self.get_auxout1_volt()
+        N = int(np.abs(volt - V_start) / dV) + 1
+        v_ramp = np.linspace(V_start, volt, N)
+        for v in v_ramp:
+            self.set_auxout1_volt(v_ramp)
+            await asyncio.sleep(dt)
+    
+    async def aset_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
+        if np.abs(dV) < 0.001:
+            raise ValueError('The resolution for AUX OUT is 0.001 V.')
+        V_start = self.get_auxout2_volt()
+        N = int(np.abs(volt - V_start) / dV) + 1
+        v_ramp = np.linspace(V_start, volt, N)
+        for v in v_ramp:
+            self.set_auxout2_volt(v_ramp)
+            await asyncio.sleep(dt)
+
 
 
 class NF5650Array():
@@ -520,3 +587,5 @@ class NF5650Array():
             return asyncio.run(self._afetch())
         else:
             return self._fetch()
+    
+    
