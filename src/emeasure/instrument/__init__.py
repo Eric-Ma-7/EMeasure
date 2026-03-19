@@ -8,7 +8,7 @@ from ._teslatronpt import TeslatronPT, iTC, iPS, MotorController
 __all__ = [
     "B2902", 
     "K2182", "K2612", "K6221", "K2400", 
-    "NF5650", 
+    "NF5650", "NF5650Array"
     "SwitchMatrix", 
     "TC290", 
     "TeslatronPT", "iTC", "iPS", "MotorController"
