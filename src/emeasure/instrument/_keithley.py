@@ -142,11 +142,11 @@ class K2612(BaseInstrument):
     
     def set_curr_ramp(self, curr: float, dI: float, dt: float, channel: str):
         i0 = self.get_curr(channel)
-        ramp_drive(self.set_curr, i0, curr, dI, dt)
+        ramp_drive(lambda i: self.set_curr(i, channel), i0, curr, dI, dt)
     
     def set_volt_ramp(self, volt: float, dV: float, dt: float, channel: str):
         v0 = self.get_volt(channel)
-        ramp_drive(self.set_volt, v0, volt, dV, dt)
+        ramp_drive(lambda v: self.set_volt(v, channel), v0, volt, dV, dt)
 
 
 class K2182(BaseInstrument):
