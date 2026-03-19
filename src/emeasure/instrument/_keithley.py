@@ -1,4 +1,5 @@
 from ._core import BaseInstrument
+from ._utils import ramp_drive
 from typing import Sequence, Optional
 
 import numpy as np
@@ -139,23 +140,13 @@ class K2612(BaseInstrument):
         else:
             raise ValueError("Source function must be 'current/curr/i' or 'voltage/volt/v'.")
     
-    def set_curr_ramp(self, I_target: float, dI: float, dt: float, channel: str):
-        I_now = self.get_curr(channel)
-        N = int(np.abs(I_target - I_now) / dI + 1)
-        currs = np.linspace(I_now, I_target, N)
-        for curr in currs:
-            self.set_curr(curr, channel)
-            self.get_iv(channel)
-            time.sleep(dt)
+    def set_curr_ramp(self, curr: float, dI: float, dt: float, channel: str):
+        i0 = self.get_curr(channel)
+        ramp_drive(self.set_curr, i0, curr, dI, dt)
     
-    def set_volt_ramp(self, V_target: float, dV: float, dt: float, channel: str):
-        V_now = self.get_volt(channel)
-        N = int(np.abs(V_target - V_now) / dV + 1)
-        volts = np.linspace(V_now, V_target, N)
-        for volt in volts:
-            self.set_volt(volt, channel)
-            self.get_iv(channel)
-            time.sleep(dt)
+    def set_volt_ramp(self, volt: float, dV: float, dt: float, channel: str):
+        v0 = self.get_volt(channel)
+        ramp_drive(self.set_volt, v0, volt, dV, dt)
 
 
 class K2182(BaseInstrument):
@@ -245,15 +236,9 @@ class K2400(BaseInstrument):
     
     def set_curr_ramp(self, curr: float, dI: float, dt: float):
         i0 = float(self.query(':SOUR:CURR?'))
-        N = int(np.abs((curr -  i0) / dI) + 1)
-        for i in np.linspace(i0, curr, N):
-            self.set_curr(i)
-            time.sleep(dt)
+        ramp_drive(self.set_curr, i0, curr, dI, dt)
     
     def set_volt_ramp(self, volt: float, dV: float, dt: float):
         v0 = float(self.query(':SOUR:VOLT?'))
-        N = int(np.abs((volt -  v0) / dV) + 1)
-        for v in np.linspace(v0, volt, N):
-            self.set_volt(v)
-            time.sleep(dt)
+        ramp_drive(self.set_volt, v0, volt, dV, dt)
     
