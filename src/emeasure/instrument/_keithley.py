@@ -1,9 +1,8 @@
-from ._core import BaseInstrument, _validate_enum_attr
-from typing import Optional, Any, Literal, Sequence
+from ._core import BaseInstrument
+from typing import Sequence, Optional
 
 import numpy as np
 import time
-import asyncio
 
 class K6221(BaseInstrument):
     def __init__(self, visa_address, rm = None):
@@ -166,6 +165,12 @@ class K2182(BaseInstrument):
 
 
 class K2400(BaseInstrument):
+    def connect(self, *, query_delay: Optional[float] = 0.05):
+        super().connect()
+        if query_delay is not None:
+            self._res.query_delay = query_delay
+        self.write(f':FORM:ELEM VOLT,CURR')
+    
     def set_output_on(self, is_on: bool = True):
         if is_on:
             self.write(':OUTP ON')
@@ -217,12 +222,15 @@ class K2400(BaseInstrument):
     def set_form_elem(self, items: Sequence[str]):
         item_list = ','.join(items)
         self.write(f':FORM:ELEM {item_list}')
-        self.write(':READ?')
     
-    def read(self) -> tuple[float]:
+    def read_data(self) -> tuple[float]:
         resp = self.query(':READ?').strip()
         data = [float(s) for s in resp.split(',')]
         return tuple(data)
+    
+    def get_iv(self) -> tuple[float, float]:
+        volt, curr = self.read_data()
+        return curr, volt
     
     # -------------------- SOURCE output control --------------------
     def set_curr(self, curr: float):
@@ -233,7 +241,7 @@ class K2400(BaseInstrument):
     def set_volt(self, volt: float):
         if volt < -210 or volt > 210:
             raise ValueError(':SOUR:VOLT must be in [-210, 210] V.')
-        self.volt(f':SOUR:VOLT {volt}')
+        self.write(f':SOUR:VOLT {volt}')
     
     def set_curr_ramp(self, curr: float, dI: float, dt: float):
         i0 = float(self.query(':SOUR:CURR?'))
@@ -242,11 +250,10 @@ class K2400(BaseInstrument):
             self.set_curr(i)
             time.sleep(dt)
     
-    def set_volt_ramp(self, volt:float, dV: float, dt: float):
+    def set_volt_ramp(self, volt: float, dV: float, dt: float):
         v0 = float(self.query(':SOUR:VOLT?'))
         N = int(np.abs((volt -  v0) / dV) + 1)
         for v in np.linspace(v0, volt, N):
             self.set_volt(v)
             time.sleep(dt)
-    
     

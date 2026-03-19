@@ -1,4 +1,4 @@
-from ._core import BaseInstrument, InstrumentError
+from ._core import BaseInstrument
 import pyvisa
 
 class SwitchMatrix(BaseInstrument):

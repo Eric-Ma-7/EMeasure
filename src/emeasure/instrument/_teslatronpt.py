@@ -1,4 +1,5 @@
-from ._core import BaseInstrument, InstrumentError, _validate_enum_attr
+from ._core import BaseInstrument, InstrumentError
+from ._utils import validate_enum_attr
 from typing import Optional, Tuple, Union, Sequence
 
 import re
@@ -193,7 +194,7 @@ class iPS(Mercury):
         return self.query_str('READ:DEV:GRPZ:PSU:ACTN')
     
     def set_action(self, actn: str):
-        token = _validate_enum_attr(actn, self._ACTN, 'IPS_ACTN')
+        token = validate_enum_attr(actn, self._ACTN, 'IPS_ACTN')
         self.write_check_valid(f'SET:DEV:GRPZ:PSU:ACTN:{token}')
     
     def set_ramp_rate(self, rate: float):

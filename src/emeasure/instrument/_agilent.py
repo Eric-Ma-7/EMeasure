@@ -1,5 +1,5 @@
-from ._core import BaseInstrument, _validate_enum_attr
-from typing import Optional, Any, Literal, Sequence
+from ._core import BaseInstrument
+from typing import Sequence
 
 class B2902(BaseInstrument):
     def set_mode(self, mode: str, channel:int):

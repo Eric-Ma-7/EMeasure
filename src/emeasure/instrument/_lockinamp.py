@@ -1,4 +1,6 @@
-from ._core import BaseInstrument, _validate_enum_attr
+from ._core import BaseInstrument
+from ._utils import validate_enum_attr, ramp_drive, aramp_drive
+
 from typing import Any, Sequence, Iterator
 import time
 import pyvisa
@@ -68,7 +70,7 @@ class NF5650(BaseInstrument):
     
     # ---------------- :DET ----------------
     def set_detect_mode(self, mode: str) -> None:
-        token = _validate_enum_attr(mode, self._DET_MODE, 'DET_MODE')
+        token = validate_enum_attr(mode, self._DET_MODE, 'DET_MODE')
         self.write(f':DET {token}')
     
     def get_detect_mode(self) -> str:
@@ -129,14 +131,14 @@ class NF5650(BaseInstrument):
 
     # ---------------- Reference Signal ----------------
     def set_ref_src(self, ref_src: str) -> None:
-        token = _validate_enum_attr(ref_src, self._REF_SRC, 'REF_SRC')
+        token = validate_enum_attr(ref_src, self._REF_SRC, 'REF_SRC')
         self.write(f':ROUT2 {token}')
     
     def get_ref_src(self) -> str:
         return self.query(':ROUT2?').strip()
     
     def set_ref_type(self, ref_type: str) -> None:
-        token = _validate_enum_attr(ref_type, self._REF_TYPE, 'REF_TYPE')
+        token = validate_enum_attr(ref_type, self._REF_TYPE, 'REF_TYPE')
         self.write(f':INP2:TYPE {token}')
     
     def get_ref_type(self) -> str:
@@ -144,7 +146,7 @@ class NF5650(BaseInstrument):
     
     # ---------------- Input Signal ----------------
     def set_sig_coupling(self, coupling: str) -> None:
-        token = _validate_enum_attr(coupling, self._SIG_COUP, 'SIG_COUP')
+        token = validate_enum_attr(coupling, self._SIG_COUP, 'SIG_COUP')
         self.write(f':INP:COUP {token}')
     
     def get_sig_coupling(self) -> str:
@@ -161,21 +163,21 @@ class NF5650(BaseInstrument):
         return harm1, harm2
     
     def set_sig_gnd(self, gnd:str) -> None:
-        token = _validate_enum_attr(gnd, self._SIG_GND, 'SIG_GND')
+        token = validate_enum_attr(gnd, self._SIG_GND, 'SIG_GND')
         self.write(f':INP:LOW {token}')
     
     def get_sig_gnd(self) -> str:
         return self.query(':INP:LOW?').strip()
     
     def set_sig_IV_gain(self, gain: str) -> None:
-        token = _validate_enum_attr(gain, self._SIG_IV_GAIN, 'SIG_IV_GAIN')
+        token = validate_enum_attr(gain, self._SIG_IV_GAIN, 'SIG_IV_GAIN')
         self.write(f':INP:GAIN {token}')
     
     def get_sig_IV_gain(self) -> str:
         return self.query(':INP:GAIN?').strip()
     
     def set_sig_connector(self, conn:str) -> None:
-        token = _validate_enum_attr(conn, self._SIG_CONN, 'SIG_CONN')
+        token = validate_enum_attr(conn, self._SIG_CONN, 'SIG_CONN')
         self.write(f':ROUT {token}')
     
     def get_sig_connector(self) -> str:
@@ -183,35 +185,35 @@ class NF5650(BaseInstrument):
     
     # ---------------- Sense of Input Signal ----------------
     def set_DR(self, sense_DR: str) -> None:
-        token = _validate_enum_attr(sense_DR, self._SENSE_DR, 'SENSE_DR')
+        token = validate_enum_attr(sense_DR, self._SENSE_DR, 'SENSE_DR')
         self.write(f':DRES {token}')
     
     def get_DR(self) -> str:
         return self.query(':DRES?').strip()
     
     def set_priPSD_filter_slope(self, slope: int|str) -> None:
-        token = _validate_enum_attr(str(int(slope)), self._SENSE_FILTER_SLOPE, 'SENSE_FILTER_SLOPE')
+        token = validate_enum_attr(str(int(slope)), self._SENSE_FILTER_SLOPE, 'SENSE_FILTER_SLOPE')
         self.write(f':FILT:SLOP {token}')
     
     def get_priPSD_filter_slope(self) -> str:
         return self.query(f':FILT:SLOP?').strip()
     
     def set_secPSD_filter_slope(self, slope: int|str) -> None:
-        token = _validate_enum_attr(str(int(slope)), self._SENSE_FILTER_SLOPE, 'SENSE_FILTER_SLOPE')
+        token = validate_enum_attr(str(int(slope)), self._SENSE_FILTER_SLOPE, 'SENSE_FILTER_SLOPE')
         self.write(f':FILT2:SLOP {token}')
     
     def get_secPSD_filter_slope(self) -> str:
         return self.query(f':FILT2:SLOP?').strip()
 
     def set_priPSD_filter_type(self, filter_type: str) -> None:
-        token = _validate_enum_attr(filter_type, self._SENSE_FILTER_TYPE, 'SENSE_FILTER_TYPE')
+        token = validate_enum_attr(filter_type, self._SENSE_FILTER_TYPE, 'SENSE_FILTER_TYPE')
         self.write(f':FILT:TYPE {token}')
     
     def get_priPSD_filter_type(self) -> str:
         return self.query(':FILT:TYPE?').strip()
     
     def set_secPSD_filter_type(self, filter_type: str) -> None:
-        token = _validate_enum_attr(filter_type, self._SENSE_FILTER_TYPE, 'SENSE_FILTER_TYPE')
+        token = validate_enum_attr(filter_type, self._SENSE_FILTER_TYPE, 'SENSE_FILTER_TYPE')
         self.write(f':FILT2:TYPE {token}')
     
     def get_secPSD_filter_type(self) -> str:
@@ -306,7 +308,7 @@ class NF5650(BaseInstrument):
         if ch not in {1, 2, 3, 4}:
             raise ValueError('Channel index must be in (1,2,3,4).')
         mode = self.get_detect_mode()
-        token = _validate_enum_attr(form, self._CALC_FORM[ch][mode], f'CALC{ch}_FORM_{mode}')
+        token = validate_enum_attr(form, self._CALC_FORM[ch][mode], f'CALC{ch}_FORM_{mode}')
         self.write(f':CALC{ch}:FORM {token}')
     
     def get_calc_form(self, ch: int) -> str:
@@ -448,7 +450,7 @@ class NF5650(BaseInstrument):
         return self.query(':SOUR:IOSC?').strip()
     
     def set_osc_output_PSD(self, psd: str):
-        token = _validate_enum_attr(psd, self._SRC_IOSC, 'SRC_IOSC')
+        token = validate_enum_attr(psd, self._SRC_IOSC, 'SRC_IOSC')
         self.write(f':SOUR:IOSC {token}')
 
     def get_osc_volt(self) -> float:
@@ -470,12 +472,12 @@ class NF5650(BaseInstrument):
     def set_auxout1_volt(self, volt: float):
         if volt > 10.5 or volt < -10.5:
             raise ValueError('AUX OUT 1 must be in [-10.5, 10.5] V.')
-        self.write(f':SOUR5:VOLT:OFFS {volt}')
+        self.write(f':SOUR5:VOLT:OFFS {volt:.3f}')
     
     def set_auxout2_volt(self, volt:float):
         if volt > 10.5 or volt < -10.5:
             raise ValueError('AUX OUT 2 must be in [-10.5, 10.5] V.')
-        self.write(f':SOUR6:VOLT:OFFS {volt}')
+        self.write(f':SOUR6:VOLT:OFFS {volt:.3f}')
     
     def get_auxout1_volt(self) -> float:
         return float(self.query(':SOUR5:VOLT:OFFS?'))
@@ -487,41 +489,65 @@ class NF5650(BaseInstrument):
         if np.abs(dV) < 0.001:
             raise ValueError('The resolution for AUX OUT is 0.001 V.')
         V_start = self.get_auxout1_volt()
-        N = int(np.abs(volt - V_start) / dV) + 1
-        v_ramp = np.linspace(V_start, volt, N)
-        for v in v_ramp:
-            self.set_auxout1_volt(v)
-            time.sleep(dt)
+        ramp_drive(self.set_auxout1_volt, V_start, volt, dV, dt)
     
     def set_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
         if np.abs(dV) < 0.001:
             raise ValueError('The resolution for AUX OUT is 0.001 V.')
         V_start = self.get_auxout2_volt()
-        N = int(np.abs(volt - V_start) / dV) + 1
-        v_ramp = np.linspace(V_start, volt, N)
-        for v in v_ramp:
-            self.set_auxout2_volt(v)
-            time.sleep(dt)
+        ramp_drive(self.set_auxout2_volt, V_start, volt, dV, dt)
     
     async def aset_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
         if np.abs(dV) < 0.001:
             raise ValueError('The resolution for AUX OUT is 0.001 V.')
         V_start = self.get_auxout1_volt()
-        N = int(np.abs(volt - V_start) / dV) + 1
-        v_ramp = np.linspace(V_start, volt, N)
-        for v in v_ramp:
-            self.set_auxout1_volt(v)
-            await asyncio.sleep(dt)
+        await aramp_drive(self.set_auxout1_volt, V_start, volt, dV, dt)
     
     async def aset_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
         if np.abs(dV) < 0.001:
             raise ValueError('The resolution for AUX OUT is 0.001 V.')
         V_start = self.get_auxout2_volt()
-        N = int(np.abs(volt - V_start) / dV) + 1
-        v_ramp = np.linspace(V_start, volt, N)
-        for v in v_ramp:
-            self.set_auxout2_volt(v)
-            await asyncio.sleep(dt)
+        await aramp_drive(self.set_auxout2_volt, V_start, volt, dV, dt)
+    
+    # def set_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
+    #     if np.abs(dV) < 0.001:
+    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
+    #     V_start = self.get_auxout1_volt()
+    #     N = int(np.abs(volt - V_start) / dV) + 1
+    #     v_ramp = np.linspace(V_start, volt, N)
+    #     for v in v_ramp:
+    #         self.set_auxout1_volt(v)
+    #         time.sleep(dt)
+    
+    # def set_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
+    #     if np.abs(dV) < 0.001:
+    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
+    #     V_start = self.get_auxout2_volt()
+    #     N = int(np.abs(volt - V_start) / dV) + 1
+    #     v_ramp = np.linspace(V_start, volt, N)
+    #     for v in v_ramp:
+    #         self.set_auxout2_volt(v)
+    #         time.sleep(dt)
+    
+    # async def aset_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
+    #     if np.abs(dV) < 0.001:
+    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
+    #     V_start = self.get_auxout1_volt()
+    #     N = int(np.abs(volt - V_start) / dV) + 1
+    #     v_ramp = np.linspace(V_start, volt, N)
+    #     for v in v_ramp:
+    #         self.set_auxout1_volt(v)
+    #         await asyncio.sleep(dt)
+    
+    # async def aset_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
+    #     if np.abs(dV) < 0.001:
+    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
+    #     V_start = self.get_auxout2_volt()
+    #     N = int(np.abs(volt - V_start) / dV) + 1
+    #     v_ramp = np.linspace(V_start, volt, N)
+    #     for v in v_ramp:
+    #         self.set_auxout2_volt(v)
+    #         await asyncio.sleep(dt)
 
 
 

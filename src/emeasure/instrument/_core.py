@@ -175,10 +175,3 @@ class BaseInstrument:
         if self._res is None:
             raise InstrumentNotConnected("No active VISA session. Call connect() first.")
         return self._res
-
-def _validate_enum_attr(var: str, valid_set: set[str], var_name: str):
-    token = var.strip().upper()
-    if token not in valid_set:
-        raise ValueError(f'Invalid input {var} for {var_name}. Valid inputs are {valid_set}')
-    else:
-        return token
