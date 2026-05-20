@@ -2,7 +2,7 @@ from ._core import BaseInstrument
 import pyvisa
 
 class SwitchMatrix(BaseInstrument):
-    def __init__(self, visa_address, rm = None):
+    def __init__(self, visa_address:str="GPIB0::20::INSTR", rm = None):
         super().__init__(visa_address, rm)
         self._map = [0] * 24
     

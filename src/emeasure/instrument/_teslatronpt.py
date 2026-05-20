@@ -1,8 +1,9 @@
-from ._core import BaseInstrument, InstrumentError
+from ._core import BaseInstrument
 from ._utils import validate_enum_attr
-from typing import Optional, Tuple, Union, Sequence
+from ._mercury import Mercury
+from typing import Union, Sequence
 
-import re
+
 import pyvisa
 import asyncio
 import time
@@ -85,73 +86,6 @@ class MotorController(BaseInstrument):
         else:
             raise TimeoutError(f'Motor is NOT at the target position.')
 
-_NUM_RE = re.compile(r"([-+]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\s*([A-Za-zΩµu%/]+)?$")
-
-class Mercury(BaseInstrument):
-    def __init__(self, visa_address, rm = None):
-        super().__init__(visa_address, rm)
-        self._thread_lock = threading.Lock()
-    
-    def write(self, cmd):
-        with self._thread_lock:
-            super().write(cmd)
-    
-    def read(self):
-        with self._thread_lock:
-            resp = super().read()
-        return resp
-    
-    def query(self, cmd):
-        with self._thread_lock:
-            resp = super().query(cmd)
-        return resp
-    
-    def connect(self):
-        with self._thread_lock:
-            super().connect()
-            self._res.set_visa_attribute(pyvisa.constants.VI_ATTR_TERMCHAR, 0xa)
-            self._res.set_visa_attribute(pyvisa.constants.VI_ATTR_TERMCHAR_EN, 0x1)
-    
-    def disconnect(self):
-        with self._thread_lock:
-            super().disconnect()
-    
-    def write_check_valid(self, cmd: str) -> str:
-        resp = (self.query(cmd) or "").strip()
-        if ':VALID' not in resp:
-            raise InstrumentError(f'Mercury iTC rejected command: {resp or "no response"}')
-    
-    def query_check_stat(self, cmd: str) -> str:
-        resp = (self.query(cmd) or "").strip()
-        if not resp.startswith('STAT:'):
-            raise InstrumentError(f'Mercury iTC unexpected reply: {resp or "no response"}')
-        else:
-            return resp
-    
-    def query_number(self, cmd: str, return_unit: bool = False) -> Tuple[float, Optional[str]]:
-        resp = self.query_check_stat(cmd)
-        tail = resp.split(':')[-1].strip()
-        m = _NUM_RE.search(tail)
-        if not m:
-            raise InstrumentError(f"Mercury iTC cannot parse numeric from: {resp}")
-        if return_unit:
-            return float(m.group(1)), (m.group(2) or None)
-        else:
-            return float(m.group(1))
-        
-    def query_bool(self, cmd: str) -> bool:
-        resp = self.query_check_stat(cmd)
-        tail = resp.split(":")[-1].strip().upper()
-        if tail in {"ON", "1", "TRUE"}:
-            return True
-        if tail in {"OFF", "0", "FALSE"}:
-            return False
-        raise InstrumentError(f"Mercury iTC cannot parse bool from: {resp}")
-    
-    def query_str(self, cmd: str) -> str:
-        resp = self.query_check_stat(cmd)
-        tail = resp.split(":")[-1].strip().upper()
-        return tail
 
 class iTC(Mercury):
     def __init__(self, visa_address, rm=None):
@@ -171,6 +105,87 @@ class iTC(Mercury):
     
     def get_flow(self) -> float:
         return self.query_number('READ:DEV:DB5.P1:PRES:LOOP:FSET')
+    
+
+    # --------------- PROBE TEMP --------------- #
+    def set_probe_temp_setpoint(self, Tprobe: float):
+        if Tprobe < 0 or Tprobe > 300:
+            raise ValueError("ITC_PROBE_TEMP must in [0, 300] K.")
+        self.write_check_valid(f"SET:DEV:DB8.T1:TEMP:LOOP:TSET:{Tprobe}")
+    
+    def get_probe_temp_setpoint(self) -> float:
+        return self.query_number("READ:DEV:DB8.T1:TEMP:LOOP:TSET")
+    
+    def set_probe_loop_enable(self, is_enable: bool=True):
+        if is_enable:
+            self.write_check_valid("SET:DEV:DB8.T1:TEMP:LOOP:ENAB:ON")
+        else:
+            self.write_check_valid("SET:DEV:DB8.T1:TEMP:LOOP:ENAB:OFF")
+    
+    def get_probe_loop_enable(self) -> bool:
+        return self.query_bool("READ:DEV:DB8.T1:TEMP:LOOP:ENAB")
+    
+    def set_probe_heater(self, percentage: float):
+        if percentage < 0 and percentage > 100:
+            raise ValueError("ITC_PROBE_HEATER must be in [0, 100]%.")
+        self.write_check_valid(f"SET:DEV:DB8.T1:TEMP:LOOP:HSET:{percentage}")
+    
+    def get_probe_heater(self) -> float:
+        return self.query_number("READ:DEV:DB8.T1:TEMP:LOOP:HSET")
+    
+
+    # --------------- VTI TEMP --------------- #
+    def set_VTI_temp_setpoint(self, Tvti: float):
+        if Tvti < 0 or Tvti > 300:
+            raise ValueError("ITC_VTI_TEMP must in [0, 300] K.")
+        self.write_check_valid(f"SET:DEV:MB1.T1:TEMP:LOOP:TSET:{Tvti}")
+    
+    def get_VTI_temp_setpoint(self) -> float:
+        return self.query_number("READ:DEV:MB1.T1:TEMP:LOOP:TSET")
+    
+    def set_VTI_loop_enable(self, is_enable: bool=True):
+        if is_enable:
+            self.write_check_valid("SET:DEV:MB1.T1:TEMP:LOOP:ENAB:ON")
+        else:
+            self.write_check_valid("SET:DEV:MB1.T1:TEMP:LOOP:ENAB:OFF")
+    
+    def get_VTI_loop_enable(self) -> bool:
+        return self.query_bool("READ:DEV:MB1.T1:TEMP:LOOP:ENAB")
+    
+    def set_VTI_heater(self, percentage: float):
+        if percentage < 0 and percentage > 100:
+            raise ValueError("ITC_VTI_HEATER must be in [0, 100]%.")
+        self.write_check_valid(f"SET:DEV:MB1.T1:TEMP:LOOP:HSET:{percentage}")
+    
+    def get_VTI_heater(self) -> float:
+        return self.query_number("READ:DEV:MB1.T1:TEMP:LOOP:HSET")
+    
+    # --------------- PRESSURE & NVFLOW --------------- #
+    def set_pres_setpoint(self, pres:float):
+        if pres < 0 and pres > 2000:
+            raise ValueError("ITC_PRES must be in [0, 2000] mbar.")
+        self.write_check_valid(f"SET:DEV:DB5.P1:PRES:LOOP:PRST:{pres}")
+    
+    def get_pres_setpoint(self) -> float:
+        return self.query_number("READ:DEV:DB5.P1:PRES:LOOP:PRST")
+    
+    def set_pres_loop_enable(self, is_enable:bool=True):
+        if is_enable:
+            self.write_check_valid("SET:DEV:DB5.P1:PRES:LOOP:FAUT:ON")
+        else:
+            self.write_check_valid("SET:DEV:DB5.P1:PRES:LOOP:FAUT:OFF")
+    
+    def get_pres_loop_enable(self) -> bool:
+        return self.query_bool("READ:DEV:DB5.P1:PRES:LOOP:FAUT")
+    
+    def set_flow_setpoint(self, flow):
+        if flow < 0 and flow > 100:
+            raise ValueError("ITC_PRES must be in [0, 100] %.")
+        self.write_check_valid(f"SET:DEV:DB5.P1:PRES:LOOP:FSET:{flow}")
+    
+    def get_flow_setpoint(self) -> float:
+        return self.query_number("READ:DEV:DB5.P1:PRES:LOOP:FSET")
+   
 
 class iPS(Mercury):
     _ACTN = {'HOLD', 'RTOS', 'RTOZ'}
@@ -260,72 +275,25 @@ class iPS(Mercury):
             await asyncio.sleep(10)
 
 
-class IpsScanner(threading.Thread):
-    def __init__(
-            self, 
-            ips: iPS,
-            B_list: Sequence[float], 
-            rate_list: Sequence[float], 
-            pause_time: Sequence[float],
-            epoch_label: Sequence[int] = None,
-            query_interval: float = 1
-    ):
-        super().__init__()
-        self.ips = ips
-        self.B_list = B_list
-        self.rate_list = rate_list
-        self.pause_time = pause_time
-        self.epoch_label = epoch_label if epoch_label is not None else range(1, len(B_list) + 1)
-        self.query_interval = query_interval
-
-        self._epoch = 0
-        self._lock = threading.Lock()
-        self._stop = threading.Event()
-        
-        self._is_rtoz = None
-    
-    @property
-    def epoch(self):
-        return self._epoch
-    
-    def stop(self, is_rtoz:bool = True):
-        self._stop.set()
-        self._is_rtoz = is_rtoz
-    
-    def run(self):
-        for b, rate, ptime, ep in zip(self.B_list, self.rate_list, self.pause_time, self.epoch_label):
-            self._epoch = ep
-            
-            self.ips.set_ramp_rate(rate)
-            self.ips.set_target_field(b)
-            self.ips.set_action('RTOS')
-
-            while (self.ips.get_action() == 'RTOS') and (not self._stop.is_set()):
-                time.sleep(self.query_interval)
-            
-            if self._stop.is_set():
-                break
-
-            self._epoch = 0
-            time.sleep(ptime)
-        
-        if self._is_rtoz:
-            self.ips.set_action('RTOZ')
-
 class TeslatronPT:
     def __init__(self, rm = None, *, connect:bool=False):
         self.itc = iTC('TCPIP0::192.168.0.20::7020::SOCKET', rm=rm)
         self.ips = iPS('TCPIP0::192.168.0.30::7020::SOCKET', rm=rm)
+        self._is_connected = False
         if connect:
             self.connect()
     
     def connect(self):
-        self.itc.connect()
-        self.ips.connect()
+        if not self._is_connected:
+            self.itc.connect()
+            self.ips.connect()
+            self._is_connected = True
     
     def disconnect(self):
-        self.itc.disconnect()
-        self.ips.disconnect()
+        if self._is_connected:
+            self.itc.disconnect()
+            self.ips.disconnect()
+            self._is_connected = False
     
     def __enter__(self):
         self.connect()
@@ -347,8 +315,21 @@ class TeslatronPT:
     
     def field_snapshot(self) -> dict[str, Union[str, float]]:
         return {
-            'Bz': self.ips.get_field(),
+            'iPS_Bz': self.ips.get_field(),
             'iPS_action': self.ips.get_action(),
             'iPS_heater_ON': self.ips.get_heater_status()
         }
     
+    def snapshot(self) -> dict[str, Union[str, float]]:
+        return {
+            **self.temp_snapshot(),
+            **self.field_snapshot()
+        }
+
+    def warm_up(self, target_temp: float = 300):
+        if target_temp < 0 or target_temp > 300:
+            raise ValueError("PROBE_TEMP and VTI_TEMP must be in [0, 300]K.")
+        self.itc.set_probe_loop_enable(True)
+        self.itc.set_VTI_loop_enable(True)
+        self.itc.set_probe_temp_setpoint(target_temp)
+        self.itc.set_VTI_temp_setpoint(target_temp)

@@ -1,6 +1,7 @@
 from ._core import BaseInstrument
 from ._utils import validate_enum_attr, ramp_drive, aramp_drive
 
+from collections import OrderedDict
 from typing import Any, Sequence, Iterator
 import time
 import pyvisa
@@ -508,110 +509,66 @@ class NF5650(BaseInstrument):
             raise ValueError('The resolution for AUX OUT is 0.001 V.')
         V_start = self.get_auxout2_volt()
         await aramp_drive(self.set_auxout2_volt, V_start, volt, dV, dt)
-    
-    # def set_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
-    #     if np.abs(dV) < 0.001:
-    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
-    #     V_start = self.get_auxout1_volt()
-    #     N = int(np.abs(volt - V_start) / dV) + 1
-    #     v_ramp = np.linspace(V_start, volt, N)
-    #     for v in v_ramp:
-    #         self.set_auxout1_volt(v)
-    #         time.sleep(dt)
-    
-    # def set_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
-    #     if np.abs(dV) < 0.001:
-    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
-    #     V_start = self.get_auxout2_volt()
-    #     N = int(np.abs(volt - V_start) / dV) + 1
-    #     v_ramp = np.linspace(V_start, volt, N)
-    #     for v in v_ramp:
-    #         self.set_auxout2_volt(v)
-    #         time.sleep(dt)
-    
-    # async def aset_auxout1_volt_ramp(self, volt: float, dV: float, dt: float):
-    #     if np.abs(dV) < 0.001:
-    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
-    #     V_start = self.get_auxout1_volt()
-    #     N = int(np.abs(volt - V_start) / dV) + 1
-    #     v_ramp = np.linspace(V_start, volt, N)
-    #     for v in v_ramp:
-    #         self.set_auxout1_volt(v)
-    #         await asyncio.sleep(dt)
-    
-    # async def aset_auxout2_volt_ramp(self, volt: float, dV: float, dt: float):
-    #     if np.abs(dV) < 0.001:
-    #         raise ValueError('The resolution for AUX OUT is 0.001 V.')
-    #     V_start = self.get_auxout2_volt()
-    #     N = int(np.abs(volt - V_start) / dV) + 1
-    #     v_ramp = np.linspace(V_start, volt, N)
-    #     for v in v_ramp:
-    #         self.set_auxout2_volt(v)
-    #         await asyncio.sleep(dt)
-
 
 
 class NF5650Array():
-    def __init__(self, lockin_list: dict[str,str], *, rm = None):
-        self._sense_data = []
-        self._var_suffix = []
+
+    def __init__(self, lockin_list: list[tuple[str, str, list[str]]], *, rm = None):
+        """
+        lockin_list: dict[addr: list of variable names for status, data1, ..., data4]
+        example:
+        nf_arr = NF5650Array({
+            ("li1", "nf_addr1", ["V_S", "V_X", "V_Y", "V_R", "V_TH"]),
+            ("li2", "nf_addr2", ["I_S", "I_Xpn", "I_Xpn", "I_Xsn", "I_Ysn"])
+        })
+        """
+        self._instr = OrderedDict()
+        self._vname = OrderedDict()
+        self._sense_data = OrderedDict()
+
+        for alias, addr, vnames in lockin_list:
+            self._instr[alias] = NF5650(addr, rm=rm)
+
+            instr_vn = []
+            instr_sd = []
+            for vn, sd in zip(vnames, ['status', 'data1', 'data2', 'data3', 'data4']):
+                if (vn is not None) and (not vn == ''):
+                    instr_vn.append(vn)
+                    instr_sd.append(sd)
+            self._vname[alias] = instr_vn
+            self._sense_data[alias] = instr_sd
         
-        self._alias: list[str] = []
-        self._instr: list[NF5650] = []
-        for alias, addr in lockin_list.items():
-            self._alias.append(alias)
-            self._instr.append(NF5650(visa_address=addr, rm=rm))
 
-        self._fetch_tasks = None
-
-    def connect(self):
-        for _, instr in self.items():
-            instr.connect()
-    
-    def disconnect(self):
-        for _, instr in self.items():
-            instr.disconnect()
-    
+    # -------------------- Container --------------------
     def __getitem__(self, alias:str) -> NF5650:
         if alias not in self.items():
             raise KeyError(f'NF5650 with alias of [{alias}] is not in this array. ')
         return self._instr[alias]
     
     def items(self) -> Iterator[tuple[str, NF5650]]:
-        for alias, instr in zip(self._alias, self._instr):
+        for alias, instr in self._instr.items():
             yield alias, instr
-
-    def set_sense_data(self, measurement_data: Sequence[str], suffix: Sequence[str]):
-        self._sense_data = measurement_data.copy()
-        self._var_suffix = suffix.copy()
-        for _, instr in self.items():
-            instr.set_sense_data(measurement_data)
     
-    def _fetch(self):
-        frame = {}
+    # -------------------- I/O --------------------
+    def connect(self):
         for alias, instr in self.items():
-            data = instr.fetch()
-            for var, d in zip(self._var_suffix, data):
-                frame[f'{alias}_{var}'] = d
-        return frame
+            instr.connect()
+            instr.set_sense_data(self._sense_data[alias])
     
-    def _ensure_afetch_tasks(self):
-        if not self._fetch_tasks:
-            self._fetch_tasks = [instr.afetch() for alias, instr in self.items()]
+    def disconnect(self):
+        for _, instr in self.items():
+            instr.disconnect()
+    
+    def __enter__(self):
+        self.connect()
+        return self
 
-    async def _afetch(self):
-        self._ensure_afetch_tasks()
-        datas = await asyncio.gather(*self._fetch_tasks)
-        frame = {}
-        for alias, data in zip(self._alias, datas):
-            for var, d in zip(self._var_suffix, data):
-                frame[f'{alias}_{var}'] = d
-        return frame
+    def __exit__(self, exc_type, exc, tb):
+        self.disconnect()
     
-    def fetch(self, asyn:bool=False):
-        if asyn:
-            return asyncio.run(self._afetch())
-        else:
-            return self._fetch()
-    
-    
+    # -------------------- fetch --------------------
+    def fetch(self) -> dict[str, float]:
+        all_data = {}
+        for alias, instr in self.items():
+            all_data = all_data | dict(zip(self._vname[alias], instr.fetch()))
+        return all_data

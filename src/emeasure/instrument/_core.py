@@ -61,6 +61,8 @@ class BaseInstrument:
         self._res: Optional[pyvisa.resources.Resource] = None
         self._aio_lock: asyncio.Lock = asyncio.Lock()
 
+        self._on_exit_hooks = []
+
     # ---------------- Lifecycle ----------------
     def connect(self) -> None:
         """Open the VISA resource using the current configuration.
@@ -102,11 +104,18 @@ class BaseInstrument:
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:
-        self.disconnect()
+        try:
+            if self.is_connected:
+                for hook in self._on_exit_hooks:
+                    hook()
+        finally:
+            self.disconnect()
 
     @property
     def is_connected(self) -> bool:
         return self._res is not None
+    
+    # ---------------- hooks ----------------
 
     # ---------------- String I/O ----------------
     def write(self, cmd: str) -> None:

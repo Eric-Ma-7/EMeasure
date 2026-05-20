@@ -295,3 +295,9 @@ class SqliteSaver:
         Exit the runtime context and close the connection.
         """
         self.close()
+
+    def __str__(self):
+        dbpath_str = f"\033[32mdbfile path: \033[33m{self.db_path}\033[0m"
+        exp_str = f"\033[32mexperiment name: \033[33m{self.experiment_name}\033[0m"
+        meta_str = "\033[32mmeta: \033[33m {}\033[0m".format(json.dumps(self.meta_dict, indent=4))
+        return "\n".join([dbpath_str, exp_str, meta_str])

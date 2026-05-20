@@ -10,6 +10,18 @@ def validate_enum_attr(var: str, valid_set: set[str], var_name: str):
     else:
         return token
 
+def connect_all(*args, **kwargs):
+    for instr in args:
+        instr.connect()
+    for _, instr in kwargs.items():
+        instr.connect()
+
+def disconnect_all(*args, **kwargs):
+    for instr in args:
+        instr.connect()
+    for _, instr in kwargs.items():
+        instr.connect()
+
 def generate_ramp_list(
     start:float, target:float, step:float, 
     *,

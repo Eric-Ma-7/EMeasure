@@ -53,7 +53,7 @@ class TeslatronPTApp(QMainWindow, Ui_TeslatronPTApp):
         ]
 
         field_text = [
-            '{:.4f}'.format(field['Bz']),
+            '{:.4f}'.format(field['iPS_Bz']),
             '{}'.format(field['iPS_action']),
             'ON' if field['iPS_heater_ON'] else 'OFF'
         ]

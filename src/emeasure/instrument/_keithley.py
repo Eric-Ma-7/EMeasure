@@ -106,6 +106,17 @@ class K2612(BaseInstrument):
         else:
             self.write(f'{smux}.source.output = 0')
     
+    def get_output_on(self, channel: str) -> bool:
+        smux = self._ch2smux(channel)
+        cmd = f'print({smux}.source.output)'
+        resp = float(self.query(cmd).strip())
+        if resp == 1:
+            return True
+        elif resp == 0:
+            return False
+        else:
+            raise ValueError("Unexpected Response for command: {cmd} -> {resp}")
+    
     def set_volt_limit(self, volt_limit: float, channel: str):
         smux = self._ch2smux(channel)
         self.write(f'{smux}.source.limitv = {volt_limit}')
