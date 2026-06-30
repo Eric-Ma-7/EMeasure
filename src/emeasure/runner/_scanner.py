@@ -8,8 +8,6 @@ from dataclasses import dataclass
 from ..instrument import TeslatronPT
 
 
-
-
 @dataclass
 class Scan1D:
     name: str
