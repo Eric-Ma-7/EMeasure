@@ -5,4 +5,4 @@ from ._switchmatrix import SwitchMatrix
 from ._tc290 import TC290
 from ._rigol import DG1022
 from ._mercury import MercuryiPS
-from ._teslatronpt import TeslatronPT, MotorController 
+from ._teslatronpt import TeslatronPT, MotorController
