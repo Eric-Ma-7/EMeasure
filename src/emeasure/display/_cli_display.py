@@ -347,7 +347,7 @@ class CliDisplay:
     def track(
         self,
         iterable: Iterable[T],
-        name: str,
+        name: str | None = None,
         *,
         total: int | float | None = None,
         description: str | None = None,
@@ -358,14 +358,30 @@ class CliDisplay:
 
         Example
         -------
-        for x in display.track(xs, "x_sweep", description="X sweep"):
-            ...
+        Use ``iterable.name`` automatically when it is available::
+
+            for x in display.track(xs, description="X sweep"):
+                ...
+
+        Or explicitly override the name::
+
+            for x in display.track(xs, "x_sweep", description="X sweep"):
+                ...
+
+        If no name is specified and the iterable has no ``name`` attribute,
+        an empty string is used.
 
         The progress bar advances by 1 after each iteration.
         """
         if not self.enabled:
             yield from iterable
             return
+
+        if name is None:
+            iterable_name = getattr(iterable, "name", "")
+            name = "" if iterable_name is None else str(iterable_name)
+        else:
+            name = str(name)
 
         if total is None:
             try:
