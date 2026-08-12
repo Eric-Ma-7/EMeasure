@@ -1,0 +1,1086 @@
+<!DOCTYPE html><html><head>
+      <title>readme_workflow</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\ericy\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.30\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-details{margin:0;padding:0;border:none}.markdown-preview .md-toc summary.md-toc-link-wrapper{cursor:pointer;list-style-position:outside}.markdown-preview .md-toc summary.md-toc-link-wrapper::marker{font-size:.85em}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='0']{margin-left:12px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='1']{margin-left:28px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='2']{margin-left:44px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='3']{margin-left:60px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='4']{margin-left:76px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='5']{margin-left:80px}.markdown-preview a.tag,.markdown-preview a.tag:active,.markdown-preview a.tag:link,.markdown-preview a.tag:visited,.markdown-preview span.tag:not(.token){display:inline-block;background-color:var(--vscode-badge-background,rgba(127,127,127,.18));color:var(--vscode-badge-foreground,currentColor);border-radius:2em;font-size:.85em;font-weight:500;padding:.05em .55em;line-height:1.5;white-space:nowrap;text-decoration:none;text-shadow:none;box-shadow:none;transition:background-color .12s ease,opacity .12s ease}.markdown-preview a.tag{cursor:pointer}.markdown-preview a.tag:focus,.markdown-preview a.tag:hover{background-color:var(--vscode-badge-background,rgba(127,127,127,.32));color:var(--vscode-badge-foreground,currentColor);opacity:.85;text-decoration:none;outline:0}.markdown-preview .wikilink-embed-content{border-left:3px solid var(--vscode-textBlockQuote-border,rgba(128,128,128,.3));background:var(--vscode-textBlockQuote-background,rgba(128,128,128,.05));margin:.5em 0;padding:.5em .75em;border-radius:0 3px 3px 0}.markdown-preview .wikilink-embed-content.wikilink-embed-error{border-left-color:var(--vscode-errorForeground,#cf222e);color:var(--vscode-errorForeground,#cf222e);font-style:italic;opacity:.8}.markdown-preview .wikilink-embed-content h1:first-child,.markdown-preview .wikilink-embed-content h2:first-child,.markdown-preview .wikilink-embed-content h3:first-child,.markdown-preview .wikilink-embed-content h4:first-child,.markdown-preview .wikilink-embed-content h5:first-child,.markdown-preview .wikilink-embed-content h6:first-child{margin-top:.25em}.markdown-preview .wikilink-embed-content .wikilink-embed-content{margin:.25em 0;padding:.25em .5em}.markdown-preview .block-id{display:none}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));border:4px solid var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));background-clip:content-box}.scrollbar-style::-webkit-scrollbar-thumb:hover{background-color:var(--vscode-scrollbarSlider-hoverBackground,rgba(120,120,120,.66))}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));border:4px solid var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb:hover{background-color:var(--vscode-scrollbarSlider-hoverBackground,rgba(120,120,120,.66))}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-details{margin:0;padding:0;border:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='0']{padding-left:0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='1']{padding-left:16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='2']{padding-left:32px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='3']{padding-left:48px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='4']{padding-left:64px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='5']{padding-left:80px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="emeasureworkflow-使用说明"><code>emeasure.workflow</code> 使用说明 </h1>
+<p><code>emeasure.workflow</code> 提供与具体仪器驱动无关的测量流程控制工具，包括可取消延时、条件轮询和多种稳态等待方法。</p>
+<p>当前公开函数包括：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>函数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>延时</td>
+<td><code>sleep()</code></td>
+<td>使用单调时钟进行可取消延时</td>
+</tr>
+<tr>
+<td>延时</td>
+<td><code>delay()</code></td>
+<td><code>sleep()</code> 的同义包装</td>
+</tr>
+<tr>
+<td>条件等待</td>
+<td><code>wait_until()</code></td>
+<td>轮询任意条件，直到连续满足指定次数</td>
+</tr>
+<tr>
+<td>稳态等待</td>
+<td><code>wait_stable_range()</code></td>
+<td>等待最近窗口的峰峰值小于容差</td>
+</tr>
+<tr>
+<td>稳态等待</td>
+<td><code>wait_stable_target()</code></td>
+<td>等待最近窗口全部进入已知目标范围</td>
+</tr>
+<tr>
+<td>稳态等待</td>
+<td><code>wait_stable()</code></td>
+<td>用 MK、Theil–Sen 和 TOST 判断未知终值是否稳定</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-导入方式">1. 导入方式 </h2>
+<p>建议从公开模块导入，不要直接从以下划线开头的内部文件导入：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> <span class="token punctuation">(</span>
+    ConditionEvaluationError<span class="token punctuation">,</span>
+    MeasurementReadError<span class="token punctuation">,</span>
+    StabilityTimeoutError<span class="token punctuation">,</span>
+    WaitTimeoutError<span class="token punctuation">,</span>
+    WorkflowCancelledError<span class="token punctuation">,</span>
+    delay<span class="token punctuation">,</span>
+    sleep<span class="token punctuation">,</span>
+    wait_stable<span class="token punctuation">,</span>
+    wait_stable_range<span class="token punctuation">,</span>
+    wait_stable_target<span class="token punctuation">,</span>
+    wait_until<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre><p>统计型 <code>wait_stable()</code> 会使用 <code>emeasure.statistics</code> 中的 MK、Theil–Sen、TOST 和 Hampel 算法，因此需要安装 NumPy 和 SciPy。</p>
+<h2 id="2-sleep可取消延时">2. <code>sleep()</code>：可取消延时 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>sleep<span class="token punctuation">(</span>
+    seconds<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span>
+</code></pre><p><code>sleep()</code> 使用单调时钟计时，因此修改系统日期或系统时间不会改变等待时长。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seconds</code></td>
+<td>等待秒数，必须是有限的非负数；允许为 <code>0</code></td>
+</tr>
+<tr>
+<td><code>cancel_event</code></td>
+<td>可选的取消事件，需要提供可调用的 <code>is_set()</code> 方法</td>
+</tr>
+<tr>
+<td><code>check_interval</code></td>
+<td>等待期间检查取消状态的最大间隔，必须大于 <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>基础示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> sleep
+
+instrument<span class="token punctuation">.</span>set_voltage<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span>
+sleep<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+value <span class="token operator">=</span> instrument<span class="token punctuation">.</span>measure_voltage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><p><code>check_interval</code> 只影响取消响应速度，不改变目标等待时长。例如 <code>check_interval=0.05</code> 表示等待期间最多约每 0.05 秒检查一次取消状态。</p>
+<h3 id="使用-threadingevent-取消">使用 <code>threading.Event</code> 取消 </h3>
+<p>标准库的 <code>threading.Event</code> 可以直接作为 <code>cancel_event</code>：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> threading
+
+<span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> WorkflowCancelledError<span class="token punctuation">,</span> sleep
+
+stop_event <span class="token operator">=</span> threading<span class="token punctuation">.</span>Event<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 示例中在 0.2 秒后请求取消。</span>
+timer <span class="token operator">=</span> threading<span class="token punctuation">.</span>Timer<span class="token punctuation">(</span><span class="token number">0.2</span><span class="token punctuation">,</span> stop_event<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">)</span>
+timer<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+    sleep<span class="token punctuation">(</span>
+        <span class="token number">10.0</span><span class="token punctuation">,</span>
+        cancel_event<span class="token operator">=</span>stop_event<span class="token punctuation">,</span>
+        check_interval<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword keyword-except">except</span> WorkflowCancelledError <span class="token keyword keyword-as">as</span> exc<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>operation<span class="token punctuation">)</span>  <span class="token comment"># "sleep"</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>elapsed<span class="token punctuation">)</span>    <span class="token comment"># 取消前已经等待的秒数</span>
+<span class="token keyword keyword-finally">finally</span><span class="token punctuation">:</span>
+    timer<span class="token punctuation">.</span>cancel<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><h2 id="3-delay延时别名">3. <code>delay()</code>：延时别名 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>delay<span class="token punctuation">(</span>
+    seconds<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span>
+</code></pre><p><code>delay()</code> 直接调用 <code>sleep()</code>，参数、异常和取消行为完全相同。它适合让测量流程读起来更自然：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> delay
+
+source<span class="token punctuation">.</span>set_output<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+delay<span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span>
+reading <span class="token operator">=</span> meter<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><p>如果项目希望保持统一风格，可以只选择 <code>sleep()</code> 或 <code>delay()</code> 中的一个使用。</p>
+<h2 id="4-cancellationevent-接口">4. <code>CancellationEvent</code> 接口 </h2>
+<p><code>CancellationEvent</code> 是一个协议类型。传入对象不需要继承某个特定类，只要提供以下方法即可：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">CancellationEvent</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-def">def</span> <span class="token function">is_set</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre><p>因此 <code>threading.Event</code>、进程间事件或自定义的停止标志都可以使用。取消后会抛出 <code>WorkflowCancelledError</code>，而不是返回一个容易被忽略的特殊值。</p>
+<h2 id="5-wait_until等待任意条件">5. <code>wait_until()</code>：等待任意条件 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>wait_until<span class="token punctuation">(</span>
+    condition<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    timeout<span class="token punctuation">,</span>
+    interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    min_wait<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    on_poll<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> WaitUntilResult
+</code></pre><p><code>wait_until()</code> 周期性调用无参数函数 <code>condition()</code>，将返回值转换为 <code>bool</code>。只有条件连续为真达到 <code>confirmations</code> 次后才返回。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>condition</code></td>
+<td>无参数可调用对象；返回值按 <code>bool(value)</code> 判断</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>最大总等待时间，必须大于 <code>0</code></td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>两次条件检查之间的间隔，必须大于 <code>0</code></td>
+</tr>
+<tr>
+<td><code>min_wait</code></td>
+<td>第一次检查前的最短等待时间，必须满足 <code>0 &lt;= min_wait &lt; timeout</code></td>
+</tr>
+<tr>
+<td><code>confirmations</code></td>
+<td>条件需要连续为真的次数，默认 <code>1</code></td>
+</tr>
+<tr>
+<td><code>cancel_event</code></td>
+<td>可选取消事件</td>
+</tr>
+<tr>
+<td><code>cancel_check_interval</code></td>
+<td>睡眠期间的取消检查间隔</td>
+</tr>
+<tr>
+<td><code>on_poll</code></td>
+<td>每次成功执行条件函数后调用的状态回调</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基础示例">基础示例 </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> wait_until
+
+result <span class="token operator">=</span> wait_until<span class="token punctuation">(</span>
+    instrument<span class="token punctuation">.</span>is_ready<span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">30.0</span><span class="token punctuation">,</span>
+    interval<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span>
+    min_wait<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>     <span class="token comment"># 最后一次 condition() 的原始返回值</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>elapsed<span class="token punctuation">)</span>   <span class="token comment"># 总耗时</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>attempts<span class="token punctuation">)</span>  <span class="token comment"># 条件函数总调用次数</span>
+</code></pre><p>当一次检查为假时，连续成功计数会重置为零。<code>confirmations=3</code> 因而可以避免单次状态抖动导致过早继续。</p>
+<h3 id="条件返回测量结果">条件返回测量结果 </h3>
+<p>条件不一定只返回 <code>True</code> 或 <code>False</code>。以下示例在温度进入范围后返回温度值，否则返回 <code>None</code>：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> wait_until
+
+<span class="token keyword keyword-def">def</span> <span class="token function">temperature_if_ready</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    temperature <span class="token operator">=</span> controller<span class="token punctuation">.</span>read_temperature<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-if">if</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>temperature <span class="token operator">-</span> <span class="token number">25.0</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0.1</span><span class="token punctuation">:</span>
+        <span class="token keyword keyword-return">return</span> temperature
+    <span class="token keyword keyword-return">return</span> <span class="token boolean">None</span>
+
+result <span class="token operator">=</span> wait_until<span class="token punctuation">(</span>
+    temperature_if_ready<span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">120.0</span><span class="token punctuation">,</span>
+    interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+stable_temperature <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+</code></pre><p>注意：如果有效结果本身可能是 <code>0</code>、空字符串或空容器，它们会被当作假值。此时应让条件明确返回 <code>True</code>，或返回一个始终为真的自定义结果对象。</p>
+<h3 id="轮询回调">轮询回调 </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> WaitUntilPoll<span class="token punctuation">,</span> wait_until
+
+<span class="token keyword keyword-def">def</span> <span class="token function">report_poll</span><span class="token punctuation">(</span>status<span class="token punctuation">:</span> WaitUntilPoll<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>
+        status<span class="token punctuation">.</span>attempt<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>condition_met<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>consecutive_successes<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>elapsed<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+result <span class="token operator">=</span> wait_until<span class="token punctuation">(</span>
+    instrument<span class="token punctuation">.</span>is_ready<span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">30.0</span><span class="token punctuation">,</span>
+    on_poll<span class="token operator">=</span>report_poll<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre><p><code>WaitUntilPoll</code> 字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>本次条件函数的原始返回值</td>
+</tr>
+<tr>
+<td><code>condition_met</code></td>
+<td><code>bool(value)</code> 的结果</td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>从等待开始到本次检查完成的秒数</td>
+</tr>
+<tr>
+<td><code>attempt</code></td>
+<td>当前检查序号，从 1 开始</td>
+</tr>
+<tr>
+<td><code>consecutive_successes</code></td>
+<td>当前连续成功次数</td>
+</tr>
+<tr>
+<td><code>required_confirmations</code></td>
+<td>要求的连续成功次数</td>
+</tr>
+</tbody>
+</table>
+<p><code>WaitUntilResult</code> 字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>最后一次条件函数的原始返回值</td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>总耗时</td>
+</tr>
+<tr>
+<td><code>attempts</code></td>
+<td>条件函数调用总次数</td>
+</tr>
+<tr>
+<td><code>consecutive_successes</code></td>
+<td>返回时的连续成功次数</td>
+</tr>
+<tr>
+<td><code>required_confirmations</code></td>
+<td>要求的连续成功次数</td>
+</tr>
+</tbody>
+</table>
+<p><code>timeout</code> 包含 <code>min_wait</code>、条件函数运行时间和回调运行时间。回调是同步执行的；如果回调抛出异常，该异常会直接向上传播。</p>
+<h2 id="6-三种稳态等待方法如何选择">6. 三种稳态等待方法如何选择 </h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>最终值</th>
+<th>判定条件</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wait_stable_range()</code></td>
+<td>可以未知</td>
+<td>最近窗口峰峰值不超过容差</td>
+<td>最简单、最快，适合低噪声数据</td>
+</tr>
+<tr>
+<td><code>wait_stable_target()</code></td>
+<td>必须已知</td>
+<td>最近窗口的所有值都位于目标带内</td>
+<td>适合温度、电压、位置等受控量</td>
+</tr>
+<tr>
+<td><code>wait_stable()</code></td>
+<td>可以未知</td>
+<td>无显著趋势、漂移足够小、相邻窗口等效</td>
+<td>判定更完整，但需要更多样本</td>
+</tr>
+</tbody>
+</table>
+<p>稳态函数都主动调用 <code>getter()</code> 读取标量测量值。<code>getter()</code> 应当：</p>
+<ul>
+<li>不接收参数；</li>
+<li>返回能够转换成 <code>float</code> 的有限标量；</li>
+<li>不在内部进行很长时间的阻塞；</li>
+<li>让驱动异常正常抛出，以便工作流包装为 <code>MeasurementReadError</code>。</li>
+</ul>
+<h2 id="7-稳态函数的公共参数">7. 稳态函数的公共参数 </h2>
+<p>三种稳态函数共享以下流程控制参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample_interval</code></td>
+<td>两次测量之间的间隔，默认 <code>0.5</code> 秒</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>包括预等待、读数和回调在内的最大总时间</td>
+</tr>
+<tr>
+<td><code>min_wait</code></td>
+<td>第一次读取前的可取消预等待</td>
+</tr>
+<tr>
+<td><code>confirmations</code></td>
+<td>稳态条件需要连续满足的检查次数，默认 <code>2</code></td>
+</tr>
+<tr>
+<td><code>check_every</code></td>
+<td>缓冲区填满后，每增加多少个样本重新检查一次</td>
+</tr>
+<tr>
+<td><code>cancel_event</code></td>
+<td>可选取消事件</td>
+</tr>
+<tr>
+<td><code>cancel_check_interval</code></td>
+<td>等待采样期间的取消检查间隔</td>
+</tr>
+<tr>
+<td><code>on_sample</code></td>
+<td>每次获得原始读数后执行的回调</td>
+</tr>
+<tr>
+<td><code>on_check</code></td>
+<td>每次完成稳态判定后执行的回调</td>
+</tr>
+</tbody>
+</table>
+<p>调用开始后，函数先等待 <code>min_wait</code>，然后立即读取第一个样本。缓冲区填满以前不会执行稳态判断。</p>
+<p>如果没有指定 <code>check_every</code>，默认值是 <code>max(1, window_size // 2)</code>。相邻检查窗口通常会重叠，但每次确认之间一定包含新样本。任何一次检查失败都会把连续成功计数重置为零。</p>
+<h3 id="公共-hampel-尖峰参数">公共 Hampel 尖峰参数 </h3>
+<p>三种函数默认只在稳态判断之前对当前窗口使用 Hampel 滤波：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hampel_window=7</code></td>
+<td>Hampel 局部窗口；设为 <code>None</code> 可关闭滤波</td>
+</tr>
+<tr>
+<td><code>hampel_threshold=3.5</code></td>
+<td>MAD 鲁棒标准差倍数</td>
+</tr>
+<tr>
+<td><code>hampel_absolute_tolerance=0.0</code></td>
+<td>尖峰检测的最小绝对偏差门槛</td>
+</tr>
+</tbody>
+</table>
+<p>被 Hampel 识别的孤立尖峰会以局部中位数替换后再参与判定。原始测量不会被修改，仍可通过 <code>on_sample</code> 保存。最终结果中的 <code>filtered_window</code> 是用于判定的窗口。</p>
+<p>如果已经能估计仪器噪声或最小分辨率，建议把 <code>hampel_absolute_tolerance</code> 设置成有物理意义的最小异常幅度，以避免 MAD 为零或很小时过度标记。</p>
+<h2 id="8-wait_stable_range峰峰值稳定">8. <code>wait_stable_range()</code>：峰峰值稳定 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>wait_stable_range<span class="token punctuation">(</span>
+    getter<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    tolerance<span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">120.0</span><span class="token punctuation">,</span>
+    min_wait<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+    check_every<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    hampel_window<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    hampel_threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    hampel_absolute_tolerance<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    on_sample<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    on_check<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> StabilityResult
+</code></pre><p>判定条件为：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>max(filtered_window) - min(filtered_window) &lt;= tolerance
+</code></pre><p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tolerance</code></td>
+<td>允许的最大峰峰值，必须大于 <code>0</code></td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>最近窗口的样本数，至少为 3</td>
+</tr>
+</tbody>
+</table>
+<p>返回的 <code>result.value</code> 是最终滤波窗口的算术平均值。</p>
+<p>示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> wait_stable_range
+
+result <span class="token operator">=</span> wait_stable_range<span class="token punctuation">(</span>
+    meter<span class="token punctuation">.</span>read_voltage<span class="token punctuation">,</span>
+    tolerance<span class="token operator">=</span><span class="token number">0.002</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">20.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+    hampel_absolute_tolerance<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>last_check<span class="token punctuation">.</span>diagnostics<span class="token punctuation">.</span>peak_to_peak<span class="token punctuation">)</span>
+</code></pre><p>这一方法速度快、含义直观，但它不会单独检验很慢的趋势。如果窗口较短，缓慢爬升的数据也可能暂时具有很小的峰峰值。</p>
+<h2 id="9-wait_stable_target已知目标值稳定">9. <code>wait_stable_target()</code>：已知目标值稳定 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>wait_stable_target<span class="token punctuation">(</span>
+    getter<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    target<span class="token punctuation">,</span>
+    tolerance<span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">120.0</span><span class="token punctuation">,</span>
+    min_wait<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+    check_every<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    hampel_window<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    hampel_threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    hampel_absolute_tolerance<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    on_sample<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    on_check<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> StabilityResult
+</code></pre><p>判定条件为：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>max(abs(filtered_window - target)) &lt;= tolerance
+</code></pre><p>也就是说，最近窗口内的每一个值都必须位于闭区间：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>[target - tolerance, target + tolerance]
+</code></pre><p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td>已知目标值，必须是有限数</td>
+</tr>
+<tr>
+<td><code>tolerance</code></td>
+<td>目标值两侧允许的绝对误差，必须大于 <code>0</code></td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>最近窗口的样本数，至少为 3</td>
+</tr>
+</tbody>
+</table>
+<p>返回的 <code>result.value</code> 是最终滤波窗口的算术平均值。</p>
+<p>示例：等待温度连续落在 <code>25.0 ± 0.1 °C</code> 范围内：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> wait_stable_target
+
+result <span class="token operator">=</span> wait_stable_target<span class="token punctuation">(</span>
+    controller<span class="token punctuation">.</span>read_temperature<span class="token punctuation">,</span>
+    target<span class="token operator">=</span><span class="token number">25.0</span><span class="token punctuation">,</span>
+    tolerance<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">180.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>last_check<span class="token punctuation">.</span>diagnostics<span class="token punctuation">.</span>maximum_error<span class="token punctuation">)</span>
+</code></pre><p>该方法只检查是否进入目标范围，不要求窗口峰峰值小于 <code>tolerance</code>。一个窗口可以同时包含 <code>target - tolerance</code> 和 <code>target + tolerance</code>，并仍然通过目标带判断。</p>
+<h2 id="10-wait_stable未知终值的统计稳态判断">10. <code>wait_stable()</code>：未知终值的统计稳态判断 </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>wait_stable<span class="token punctuation">(</span>
+    getter<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    equivalence_tolerance<span class="token punctuation">,</span>
+    drift_tolerance<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>
+    alpha<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">120.0</span><span class="token punctuation">,</span>
+    min_wait<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+    check_every<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_event<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    cancel_check_interval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+    hampel_window<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    hampel_threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    hampel_absolute_tolerance<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    on_sample<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    on_check<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> StabilityResult
+</code></pre><p>该函数保存两个相邻窗口，因此开始第一次判断前至少需要 <code>2 × window_size</code> 个样本。每个窗口各有 <code>window_size</code> 个值。</p>
+<p>一次检查只有同时满足以下三项才算稳定：</p>
+<ol>
+<li>MK 检验没有发现显著单调趋势；</li>
+<li>Theil–Sen 在两个窗口范围内估计的总变化量绝对值不超过 <code>drift_tolerance</code>；</li>
+<li>Welch TOST 证明新旧窗口均值差位于 <code>±equivalence_tolerance</code> 内。</li>
+</ol>
+<p>统计参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>equivalence_tolerance</code></td>
+<td>新旧窗口均值允许的最大绝对差，必须大于 <code>0</code></td>
+</tr>
+<tr>
+<td><code>drift_tolerance</code></td>
+<td>两个窗口范围内允许的 Theil–Sen 总变化量；省略时等于 <code>equivalence_tolerance</code></td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>每一个子窗口的样本数，至少为 2</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>MK 和 TOST 的显著性水平，必须位于 <code>(0, 0.5)</code></td>
+</tr>
+</tbody>
+</table>
+<p>返回的 <code>result.value</code> 是较新子窗口的滤波后平均值。</p>
+<p>示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> wait_stable
+
+result <span class="token operator">=</span> wait_stable<span class="token punctuation">(</span>
+    meter<span class="token punctuation">.</span>read_voltage<span class="token punctuation">,</span>
+    equivalence_tolerance<span class="token operator">=</span><span class="token number">0.005</span><span class="token punctuation">,</span>
+    drift_tolerance<span class="token operator">=</span><span class="token number">0.003</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">,</span>
+    alpha<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">60.0</span><span class="token punctuation">,</span>
+    confirmations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+    hampel_window<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    hampel_absolute_tolerance<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+diagnostics <span class="token operator">=</span> result<span class="token punctuation">.</span>last_check<span class="token punctuation">.</span>diagnostics
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>diagnostics<span class="token punctuation">.</span>mann_kendall<span class="token punctuation">.</span>has_trend<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>diagnostics<span class="token punctuation">.</span>theil_sen<span class="token punctuation">.</span>estimated_change<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>diagnostics<span class="token punctuation">.</span>tost<span class="token punctuation">.</span>equivalent<span class="token punctuation">)</span>
+</code></pre><p>统计型方法的注意事项：</p>
+<ul>
+<li>MK 的“未检出趋势”本身不能证明稳定，所以实现还会检查漂移量和窗口等效性。</li>
+<li>TOST 需要足够数据才能证明等效。窗口太小、噪声太大或容差太窄时，函数可能一直等到超时。</li>
+<li>相邻样本如果具有很强的自相关，MK 和 TOST 的 p 值可能不够准确。可以适当增大 <code>sample_interval</code>，使相邻读数更接近独立。</li>
+<li><code>equivalence_tolerance</code> 和 <code>drift_tolerance</code> 应根据测量单位和实验需求设定，不能只根据本次数据临时放宽。</li>
+</ul>
+<h2 id="11-稳态状态回调">11. 稳态状态回调 </h2>
+<h3 id="stabilitysample"><code>StabilitySample</code> </h3>
+<p><code>on_sample</code> 每次收到一个原始读数后执行：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> StabilitySample
+
+<span class="token keyword keyword-def">def</span> <span class="token function">save_sample</span><span class="token punctuation">(</span>status<span class="token punctuation">:</span> StabilitySample<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    saver<span class="token punctuation">.</span>add<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">"elapsed"</span><span class="token punctuation">:</span> status<span class="token punctuation">.</span>elapsed<span class="token punctuation">,</span>
+        <span class="token string">"sample"</span><span class="token punctuation">:</span> status<span class="token punctuation">.</span>sample<span class="token punctuation">,</span>
+        <span class="token string">"voltage"</span><span class="token punctuation">:</span> status<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><p>字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>未经 Hampel 替换的原始有限读数</td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>从等待开始到本次读取完成的秒数</td>
+</tr>
+<tr>
+<td><code>sample</code></td>
+<td>样本序号，从 1 开始</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stabilitycheck"><code>StabilityCheck</code> </h3>
+<p><code>on_check</code> 在缓冲区填满并完成一次稳定判断后执行：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> StabilityCheck
+
+<span class="token keyword keyword-def">def</span> <span class="token function">report_check</span><span class="token punctuation">(</span>status<span class="token punctuation">:</span> StabilityCheck<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>
+        status<span class="token punctuation">.</span>method<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>stable_now<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>consecutive_successes<span class="token punctuation">,</span>
+        status<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+</code></pre><p>字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td><code>"range"</code>、<code>"target"</code> 或 <code>"statistical"</code></td>
+</tr>
+<tr>
+<td><code>stable_now</code></td>
+<td>本次窗口是否通过判断</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>本次窗口的代表值</td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>本次判断完成时的总耗时</td>
+</tr>
+<tr>
+<td><code>samples</code></td>
+<td>到目前为止读取的样本总数</td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>范围/目标窗口长度，或统计方法的单个子窗口长度</td>
+</tr>
+<tr>
+<td><code>window_outlier_count</code></td>
+<td>当前完整判定窗口中由 Hampel 标记的点数</td>
+</tr>
+<tr>
+<td><code>consecutive_successes</code></td>
+<td>当前连续通过次数</td>
+</tr>
+<tr>
+<td><code>required_confirmations</code></td>
+<td>要求的连续通过次数</td>
+</tr>
+<tr>
+<td><code>filtered_window</code></td>
+<td>实际参与判断的滤波后完整窗口</td>
+</tr>
+<tr>
+<td><code>diagnostics</code></td>
+<td>与具体方法对应的诊断对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stabilityresult"><code>StabilityResult</code> </h3>
+<p>稳态条件连续满足后返回：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td>使用的稳态方法</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>最终代表值</td>
+</tr>
+<tr>
+<td><code>elapsed</code></td>
+<td>总等待时间</td>
+</tr>
+<tr>
+<td><code>samples</code></td>
+<td>读取的样本总数</td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>报告窗口长度</td>
+</tr>
+<tr>
+<td><code>window_outlier_count</code></td>
+<td>最终窗口内的尖峰数量</td>
+</tr>
+<tr>
+<td><code>consecutive_successes</code></td>
+<td>返回时的连续通过次数</td>
+</tr>
+<tr>
+<td><code>filtered_window</code></td>
+<td>最终判断使用的滤波窗口</td>
+</tr>
+<tr>
+<td><code>last_check</code></td>
+<td>完整的最后一次 <code>StabilityCheck</code></td>
+</tr>
+</tbody>
+</table>
+<p>回调同步执行，其运行时间计入 <code>timeout</code>。回调异常会直接向上传播，因此保存或显示状态的回调应尽量快速，并自行处理可恢复的记录错误。</p>
+<h2 id="12-三种诊断对象">12. 三种诊断对象 </h2>
+<p>根据 <code>StabilityCheck.method</code>，<code>diagnostics</code> 是以下对象之一。</p>
+<h3 id="rangestabilitydiagnostics"><code>RangeStabilityDiagnostics</code> </h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>peak_to_peak</code></td>
+<td>当前滤波窗口的峰峰值</td>
+</tr>
+<tr>
+<td><code>tolerance</code></td>
+<td>要求的峰峰值上限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="targetstabilitydiagnostics"><code>TargetStabilityDiagnostics</code> </h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td>目标值</td>
+</tr>
+<tr>
+<td><code>maximum_error</code></td>
+<td>当前窗口内最大的目标绝对误差</td>
+</tr>
+<tr>
+<td><code>tolerance</code></td>
+<td>允许的最大目标误差</td>
+</tr>
+</tbody>
+</table>
+<h3 id="statisticalstabilitydiagnostics"><code>StatisticalStabilityDiagnostics</code> </h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mann_kendall</code></td>
+<td>完整的 <code>MannKendallResult</code></td>
+</tr>
+<tr>
+<td><code>theil_sen</code></td>
+<td>完整的 <code>TheilSenResult</code></td>
+</tr>
+<tr>
+<td><code>tost</code></td>
+<td>完整的 <code>TOSTResult</code></td>
+</tr>
+<tr>
+<td><code>drift_tolerance</code></td>
+<td>实际使用的漂移容差</td>
+</tr>
+<tr>
+<td><code>equivalence_tolerance</code></td>
+<td>实际使用的等效容差</td>
+</tr>
+</tbody>
+</table>
+<p>这些结果对象都是只读 dataclass，适合直接记录到日志或在界面中显示。</p>
+<h2 id="13-异常与诊断信息">13. 异常与诊断信息 </h2>
+<p>所有工作流专用异常都继承 <code>WorkflowError</code>。</p>
+<table>
+<thead>
+<tr>
+<th>异常</th>
+<th>发生条件</th>
+<th>重要字段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WorkflowCancelledError</code></td>
+<td><code>cancel_event.is_set()</code> 返回真</td>
+<td><code>operation</code>、<code>elapsed</code></td>
+</tr>
+<tr>
+<td><code>WaitTimeoutError</code></td>
+<td><code>wait_until()</code> 超时</td>
+<td><code>timeout</code>、<code>elapsed</code>、<code>attempts</code>、<code>last_value</code>、<code>operation</code></td>
+</tr>
+<tr>
+<td><code>ConditionEvaluationError</code></td>
+<td><code>condition()</code> 抛出异常</td>
+<td><code>elapsed</code>、<code>attempt</code></td>
+</tr>
+<tr>
+<td><code>MeasurementReadError</code></td>
+<td><code>getter()</code> 抛出异常，或返回值无法转换为有限浮点数</td>
+<td><code>elapsed</code>、<code>sample</code></td>
+</tr>
+<tr>
+<td><code>StabilityTimeoutError</code></td>
+<td>稳态等待超时</td>
+<td><code>timeout</code>、<code>elapsed</code>、<code>samples</code>、<code>last_check</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>WaitTimeoutError</code> 同时继承 Python 的 <code>TimeoutError</code>；<code>StabilityTimeoutError</code> 又继承 <code>WaitTimeoutError</code>。</p>
+<h3 id="处理条件超时">处理条件超时 </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> WaitTimeoutError<span class="token punctuation">,</span> wait_until
+
+<span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+    wait_until<span class="token punctuation">(</span>
+        instrument<span class="token punctuation">.</span>is_ready<span class="token punctuation">,</span>
+        timeout<span class="token operator">=</span><span class="token number">10.0</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword keyword-except">except</span> WaitTimeoutError <span class="token keyword keyword-as">as</span> exc<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>attempts<span class="token punctuation">)</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>last_value<span class="token punctuation">)</span>
+</code></pre><h3 id="处理稳态超时">处理稳态超时 </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> StabilityTimeoutError<span class="token punctuation">,</span> wait_stable_range
+
+<span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+    wait_stable_range<span class="token punctuation">(</span>
+        meter<span class="token punctuation">.</span>read_voltage<span class="token punctuation">,</span>
+        tolerance<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">,</span>
+        timeout<span class="token operator">=</span><span class="token number">30.0</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword keyword-except">except</span> StabilityTimeoutError <span class="token keyword keyword-as">as</span> exc<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>samples<span class="token punctuation">)</span>
+    <span class="token keyword keyword-if">if</span> exc<span class="token punctuation">.</span>last_check <span class="token keyword keyword-is">is</span> <span class="token keyword keyword-not">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>last_check<span class="token punctuation">.</span>stable_now<span class="token punctuation">)</span>
+        <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>exc<span class="token punctuation">.</span>last_check<span class="token punctuation">.</span>diagnostics<span class="token punctuation">)</span>
+</code></pre><h3 id="查看原始仪器异常">查看原始仪器异常 </h3>
+<p><code>ConditionEvaluationError</code> 和 <code>MeasurementReadError</code> 使用异常链保留了原始异常：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> MeasurementReadError<span class="token punctuation">,</span> wait_stable_range
+
+<span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+    wait_stable_range<span class="token punctuation">(</span>
+        meter<span class="token punctuation">.</span>read_voltage<span class="token punctuation">,</span>
+        tolerance<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+        timeout<span class="token operator">=</span><span class="token number">10.0</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword keyword-except">except</span> MeasurementReadError <span class="token keyword keyword-as">as</span> exc<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"读取失败的样本："</span><span class="token punctuation">,</span> exc<span class="token punctuation">.</span>sample<span class="token punctuation">)</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"底层异常："</span><span class="token punctuation">,</span> exc<span class="token punctuation">.</span>__cause__<span class="token punctuation">)</span>
+</code></pre><p>参数错误通常直接抛出 <code>TypeError</code> 或 <code>ValueError</code>，用于在测量开始前尽早发现配置问题。</p>
+<h2 id="14-与数据保存器组合">14. 与数据保存器组合 </h2>
+<p><code>on_sample</code> 可以把等待期间的每个原始读数保存下来，而不仅仅保存最终稳定值：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> StabilitySample<span class="token punctuation">,</span> wait_stable
+
+<span class="token keyword keyword-def">def</span> <span class="token function">record</span><span class="token punctuation">(</span>status<span class="token punctuation">:</span> StabilitySample<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    saver<span class="token punctuation">.</span>add<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">"elapsed_s"</span><span class="token punctuation">:</span> status<span class="token punctuation">.</span>elapsed<span class="token punctuation">,</span>
+        <span class="token string">"reading"</span><span class="token punctuation">:</span> status<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+result <span class="token operator">=</span> wait_stable<span class="token punctuation">(</span>
+    meter<span class="token punctuation">.</span>read_voltage<span class="token punctuation">,</span>
+    equivalence_tolerance<span class="token operator">=</span><span class="token number">0.005</span><span class="token punctuation">,</span>
+    drift_tolerance<span class="token operator">=</span><span class="token number">0.003</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>
+    sample_interval<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span>
+    timeout<span class="token operator">=</span><span class="token number">60.0</span><span class="token punctuation">,</span>
+    on_sample<span class="token operator">=</span>record<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"稳定测量值："</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+</code></pre><p>建议同时保存原始读数、最终结果、稳态方法和 <code>last_check.diagnostics</code>。这样以后可以重新检查容差是否合理，也能区分原始尖峰和滤波后的判定数据。</p>
+<h2 id="15-完整流程示例">15. 完整流程示例 </h2>
+<p>以下示例展示设定仪器、等待目标稳定、读取数据和保证关闭输出的基本结构：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> threading
+
+<span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>workflow <span class="token keyword keyword-import">import</span> <span class="token punctuation">(</span>
+    StabilityTimeoutError<span class="token punctuation">,</span>
+    WorkflowCancelledError<span class="token punctuation">,</span>
+    wait_stable_target<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+stop_event <span class="token operator">=</span> threading<span class="token punctuation">.</span>Event<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+source<span class="token punctuation">.</span>set_output<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+    controller<span class="token punctuation">.</span>set_temperature<span class="token punctuation">(</span><span class="token number">25.0</span><span class="token punctuation">)</span>
+
+    result <span class="token operator">=</span> wait_stable_target<span class="token punctuation">(</span>
+        controller<span class="token punctuation">.</span>read_temperature<span class="token punctuation">,</span>
+        target<span class="token operator">=</span><span class="token number">25.0</span><span class="token punctuation">,</span>
+        tolerance<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+        window_size<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">,</span>
+        sample_interval<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>
+        timeout<span class="token operator">=</span><span class="token number">180.0</span><span class="token punctuation">,</span>
+        min_wait<span class="token operator">=</span><span class="token number">2.0</span><span class="token punctuation">,</span>
+        confirmations<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+        cancel_event<span class="token operator">=</span>stop_event<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+    measurement <span class="token operator">=</span> meter<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"稳定温度："</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"测量值："</span><span class="token punctuation">,</span> measurement<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-except">except</span> WorkflowCancelledError<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"测量已取消"</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-except">except</span> StabilityTimeoutError <span class="token keyword keyword-as">as</span> exc<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"等待稳定超时，已读取样本数："</span><span class="token punctuation">,</span> exc<span class="token punctuation">.</span>samples<span class="token punctuation">)</span>
+<span class="token keyword keyword-finally">finally</span><span class="token punctuation">:</span>
+    source<span class="token punctuation">.</span>set_output<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+</code></pre><p>无论成功、取消还是超时，都应在 <code>finally</code> 中让仪器回到预期状态。关闭输出、停止扫描或恢复量程等操作不应依赖稳态等待成功。</p>
+<h2 id="16-参数选择建议">16. 参数选择建议 </h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>选择思路</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample_interval</code></td>
+<td>应足以让相邻读数反映新信息；不必远快于仪器或器件响应时间</td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>越大越稳健但等待越久；应覆盖一段有代表性的响应时间</td>
+</tr>
+<tr>
+<td><code>confirmations</code></td>
+<td>一般使用 2～3，降低偶然窗口通过的概率</td>
+</tr>
+<tr>
+<td><code>check_every</code></td>
+<td>较小会更快响应但重复计算更多；默认半个窗口通常足够</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>应大于 <code>min_wait + 填满窗口所需时间</code>，并留出多次确认时间</td>
+</tr>
+<tr>
+<td><code>tolerance</code></td>
+<td>使用实验允许误差或仪器规格，不要只根据当前数据决定</td>
+</tr>
+<tr>
+<td><code>equivalence_tolerance</code></td>
+<td>表示相邻窗口均值在物理上可忽略的最大差异</td>
+</tr>
+<tr>
+<td><code>drift_tolerance</code></td>
+<td>表示完整统计窗口内允许的最大估计漂移</td>
+</tr>
+<tr>
+<td><code>hampel_absolute_tolerance</code></td>
+<td>可参考已知噪声、量化步长或最小有意义变化</td>
+</tr>
+</tbody>
+</table>
+<p>统计型 <code>wait_stable()</code> 第一次检查至少需要 <code>2 × window_size</code> 个样本。例如 <code>window_size=10</code>、<code>sample_interval=0.5</code> 时，仅填满缓冲区就需要约 9.5 秒，再加上 <code>min_wait</code>、后续确认和读数耗时。设置 <code>timeout</code> 时必须考虑这一点。</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

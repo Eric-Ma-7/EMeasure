@@ -1,0 +1,868 @@
+<!DOCTYPE html><html><head>
+      <title>readme_statistics</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\ericy\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.30\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-details{margin:0;padding:0;border:none}.markdown-preview .md-toc summary.md-toc-link-wrapper{cursor:pointer;list-style-position:outside}.markdown-preview .md-toc summary.md-toc-link-wrapper::marker{font-size:.85em}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='0']{margin-left:12px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='1']{margin-left:28px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='2']{margin-left:44px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='3']{margin-left:60px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='4']{margin-left:76px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='5']{margin-left:80px}.markdown-preview a.tag,.markdown-preview a.tag:active,.markdown-preview a.tag:link,.markdown-preview a.tag:visited,.markdown-preview span.tag:not(.token){display:inline-block;background-color:var(--vscode-badge-background,rgba(127,127,127,.18));color:var(--vscode-badge-foreground,currentColor);border-radius:2em;font-size:.85em;font-weight:500;padding:.05em .55em;line-height:1.5;white-space:nowrap;text-decoration:none;text-shadow:none;box-shadow:none;transition:background-color .12s ease,opacity .12s ease}.markdown-preview a.tag{cursor:pointer}.markdown-preview a.tag:focus,.markdown-preview a.tag:hover{background-color:var(--vscode-badge-background,rgba(127,127,127,.32));color:var(--vscode-badge-foreground,currentColor);opacity:.85;text-decoration:none;outline:0}.markdown-preview .wikilink-embed-content{border-left:3px solid var(--vscode-textBlockQuote-border,rgba(128,128,128,.3));background:var(--vscode-textBlockQuote-background,rgba(128,128,128,.05));margin:.5em 0;padding:.5em .75em;border-radius:0 3px 3px 0}.markdown-preview .wikilink-embed-content.wikilink-embed-error{border-left-color:var(--vscode-errorForeground,#cf222e);color:var(--vscode-errorForeground,#cf222e);font-style:italic;opacity:.8}.markdown-preview .wikilink-embed-content h1:first-child,.markdown-preview .wikilink-embed-content h2:first-child,.markdown-preview .wikilink-embed-content h3:first-child,.markdown-preview .wikilink-embed-content h4:first-child,.markdown-preview .wikilink-embed-content h5:first-child,.markdown-preview .wikilink-embed-content h6:first-child{margin-top:.25em}.markdown-preview .wikilink-embed-content .wikilink-embed-content{margin:.25em 0;padding:.25em .5em}.markdown-preview .block-id{display:none}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));border:4px solid var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));background-clip:content-box}.scrollbar-style::-webkit-scrollbar-thumb:hover{background-color:var(--vscode-scrollbarSlider-hoverBackground,rgba(120,120,120,.66))}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));border:4px solid var(--vscode-scrollbarSlider-background,rgba(150,150,150,.66));background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb:hover{background-color:var(--vscode-scrollbarSlider-hoverBackground,rgba(120,120,120,.66))}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-details{margin:0;padding:0;border:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='0']{padding-left:0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='1']{padding-left:16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='2']{padding-left:32px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='3']{padding-left:48px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='4']{padding-left:64px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='5']{padding-left:80px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="emeasurestatistics-使用说明"><code>emeasure.statistics</code> 使用说明 </h1>
+<p><code>emeasure.statistics</code> 提供面向实验测量数据的趋势检验、等效性检验和偶发尖峰处理工具。</p>
+<p>当前公开接口包括：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>函数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>趋势检验</td>
+<td><code>mann_kendall_test()</code></td>
+<td>判断有序数据中是否存在显著的单调上升或下降趋势</td>
+</tr>
+<tr>
+<td>趋势估计</td>
+<td><code>theil_sen_test()</code></td>
+<td>鲁棒估计斜率、置信区间和整个观测区间内的变化量</td>
+</tr>
+<tr>
+<td>等效性检验</td>
+<td><code>tost_independent()</code></td>
+<td>判断两组相互独立的数据均值是否在给定容差内等效</td>
+</tr>
+<tr>
+<td>等效性检验</td>
+<td><code>tost_paired()</code></td>
+<td>判断两组一一对应的数据是否在给定容差内等效</td>
+</tr>
+<tr>
+<td>鲁棒尺度</td>
+<td><code>median_absolute_deviation()</code></td>
+<td>计算未缩放的中位数绝对偏差 MAD</td>
+</tr>
+<tr>
+<td>鲁棒尺度</td>
+<td><code>robust_standard_deviation()</code></td>
+<td>使用 <code>1.4826 × MAD</code> 估计标准差</td>
+</tr>
+<tr>
+<td>单点检测</td>
+<td><code>mad_outlier_test()</code></td>
+<td>判断一个新测量值是否偏离参考窗口</td>
+</tr>
+<tr>
+<td>序列滤波</td>
+<td><code>hampel_filter()</code></td>
+<td>使用滑动窗口检测并处理序列中的偶发尖峰</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-安装依赖与导入">1. 安装依赖与导入 </h2>
+<p>这些函数依赖 NumPy 和 SciPy：</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>python <span class="token parameter variable">-m</span> pip <span class="token function">install</span> numpy scipy
+</code></pre><p>建议始终从公开模块导入，不要直接从 <code>_trend.py</code>、<code>_equivalence.py</code> 或 <code>_outlier.py</code> 导入：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> <span class="token punctuation">(</span>
+    hampel_filter<span class="token punctuation">,</span>
+    mad_outlier_test<span class="token punctuation">,</span>
+    mann_kendall_test<span class="token punctuation">,</span>
+    median_absolute_deviation<span class="token punctuation">,</span>
+    robust_standard_deviation<span class="token punctuation">,</span>
+    theil_sen_test<span class="token punctuation">,</span>
+    tost_independent<span class="token punctuation">,</span>
+    tost_paired<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre><p>所有输入数据都应是一维、有限的实数序列。当前实现不自动忽略 <code>NaN</code> 或无穷大；应在调用前处理这些值。</p>
+<h2 id="2-mannkendall-单调趋势检验">2. Mann–Kendall 单调趋势检验 </h2>
+<h3 id="mann_kendall_test"><code>mann_kendall_test()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>mann_kendall_test<span class="token punctuation">(</span>
+    values<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    alpha<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    alternative<span class="token operator">=</span><span class="token string">"two-sided"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> MannKendallResult
+</code></pre><p>Mann–Kendall（MK）检验是一种非参数趋势检验。它不要求数据服从正态分布，也不直接假设趋势为线性，因此适合判断实验数据是否仍在持续上升或下降。</p>
+<p>原假设是“序列不存在单调趋势”。当 <code>p_value &lt; alpha</code> 时拒绝原假设，并认为检测到了趋势。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>values</code></td>
+<td>按采样顺序排列的一维数据，至少需要 3 个有限值</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>显著性水平，默认 <code>0.05</code></td>
+</tr>
+<tr>
+<td><code>alternative="two-sided"</code></td>
+<td>同时检测上升和下降趋势</td>
+</tr>
+<tr>
+<td><code>alternative="increasing"</code></td>
+<td>只检验上升趋势</td>
+</tr>
+<tr>
+<td><code>alternative="decreasing"</code></td>
+<td>只检验下降趋势</td>
+</tr>
+</tbody>
+</table>
+<p>基础示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> mann_kendall_test
+
+values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">1.05</span><span class="token punctuation">,</span> <span class="token number">1.08</span><span class="token punctuation">,</span> <span class="token number">1.11</span><span class="token punctuation">,</span> <span class="token number">1.15</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> mann_kendall_test<span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>has_trend<span class="token punctuation">)</span>  <span class="token comment"># True</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>trend<span class="token punctuation">)</span>      <span class="token comment"># "increasing"</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>p_value<span class="token punctuation">)</span>    <span class="token comment"># 约 0.0085</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>tau<span class="token punctuation">)</span>        <span class="token comment"># 1.0</span>
+</code></pre><p>对于近似稳定的序列：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">0.99</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">0.98</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> mann_kendall_test<span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-if">if</span> result<span class="token punctuation">.</span>has_trend<span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"仍存在趋势："</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>trend<span class="token punctuation">)</span>
+<span class="token keyword keyword-else">else</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"没有检出显著单调趋势"</span><span class="token punctuation">)</span>
+</code></pre><p><code>MannKendallResult</code> 的主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>has_trend</code></td>
+<td>是否在给定 <code>alpha</code> 下检出显著趋势</td>
+</tr>
+<tr>
+<td><code>trend</code></td>
+<td><code>"increasing"</code>、<code>"decreasing"</code> 或 <code>"none"</code></td>
+</tr>
+<tr>
+<td><code>p_value</code></td>
+<td>检验的 p 值</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>连续性修正后的标准化统计量</td>
+</tr>
+<tr>
+<td><code>tau</code></td>
+<td>Kendall tau；符号表示方向，绝对值反映排序关联强度</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>MK 原始统计量 S</td>
+</tr>
+<tr>
+<td><code>variance_s</code></td>
+<td>对重复测量值修正后的 S 方差</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>实际使用的显著性水平</td>
+</tr>
+<tr>
+<td><code>alternative</code></td>
+<td>实际使用的备择假设</td>
+</tr>
+<tr>
+<td><code>samples</code></td>
+<td>样本数量</td>
+</tr>
+</tbody>
+</table>
+<p>注意事项：</p>
+<ul>
+<li><code>has_trend=False</code> 只表示“没有检出趋势”，不等于已经证明数据稳定。</li>
+<li>如果采样非常密集，连续点之间可能存在很强的自相关，普通 MK 检验得到的 p 值可能过于乐观。</li>
+<li>单侧检验应当在分析前已经明确趋势方向时使用，不应根据观察到的数据临时选择方向。</li>
+<li>在稳态判断中，建议同时限制 Theil–Sen 漂移量，并用 TOST 检查相邻窗口是否等效。</li>
+</ul>
+<h2 id="3-theilsen-鲁棒斜率估计">3. Theil–Sen 鲁棒斜率估计 </h2>
+<h3 id="theil_sen_test"><code>theil_sen_test()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>theil_sen_test<span class="token punctuation">(</span>
+    values<span class="token punctuation">,</span>
+    x<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    confidence<span class="token operator">=</span><span class="token number">0.95</span><span class="token punctuation">,</span>
+    method<span class="token operator">=</span><span class="token string">"separate"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> TheilSenResult
+</code></pre><p>Theil–Sen 方法取所有点对斜率的中位数，因此比普通最小二乘直线更不容易被单个尖峰拉偏。它适合回答两个问题：</p>
+<ol>
+<li>数据变化的典型速率是多少？</li>
+<li>斜率置信区间是否完全位于零的一侧？</li>
+</ol>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>values</code></td>
+<td>因变量序列，至少需要 3 个有限值</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>可选的自变量；省略时使用 <code>0, 1, 2, ...</code> 作为样本序号</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>斜率置信区间的置信水平，默认 <code>0.95</code></td>
+</tr>
+<tr>
+<td><code>method="separate"</code></td>
+<td>截距为 <code>median(y) - slope × median(x)</code></td>
+</tr>
+<tr>
+<td><code>method="joint"</code></td>
+<td>截距为 <code>median(y - slope × x)</code></td>
+</tr>
+</tbody>
+</table>
+<p>含一个尖峰的数据示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> theil_sen_test
+
+values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">10.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">,</span> <span class="token number">3.5</span><span class="token punctuation">,</span> <span class="token number">4.0</span><span class="token punctuation">,</span> <span class="token number">4.5</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> theil_sen_test<span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>slope<span class="token punctuation">)</span>             <span class="token comment"># 0.5，每个采样点约增加 0.5</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>has_trend<span class="token punctuation">)</span>         <span class="token comment"># True</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>trend<span class="token punctuation">)</span>             <span class="token comment"># "increasing"</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>estimated_change<span class="token punctuation">)</span>  <span class="token comment"># 4.5，整个窗口内的估计变化量</span>
+</code></pre><p>当采样间隔不是 1 时，应传入实际时间：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>time_s <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span>
+voltage_v <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">1.03</span><span class="token punctuation">,</span> <span class="token number">1.04</span><span class="token punctuation">,</span> <span class="token number">1.05</span><span class="token punctuation">]</span>
+
+result <span class="token operator">=</span> theil_sen_test<span class="token punctuation">(</span>voltage_v<span class="token punctuation">,</span> x<span class="token operator">=</span>time_s<span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>slope<span class="token punctuation">)</span>             <span class="token comment"># 单位为 V/s</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>estimated_change<span class="token punctuation">)</span>  <span class="token comment"># 单位为 V</span>
+</code></pre><p><code>TheilSenResult</code> 的主要字段和属性：</p>
+<table>
+<thead>
+<tr>
+<th>字段或属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>has_trend</code></td>
+<td>斜率置信区间是否完全位于零的一侧</td>
+</tr>
+<tr>
+<td><code>trend</code></td>
+<td><code>"increasing"</code>、<code>"decreasing"</code> 或 <code>"none"</code></td>
+</tr>
+<tr>
+<td><code>slope</code></td>
+<td>鲁棒斜率估计</td>
+</tr>
+<tr>
+<td><code>intercept</code></td>
+<td>截距估计</td>
+</tr>
+<tr>
+<td><code>slope_low</code>、<code>slope_high</code></td>
+<td>斜率置信区间</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>置信水平</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>截距计算方法</td>
+</tr>
+<tr>
+<td><code>samples</code></td>
+<td>样本数量</td>
+</tr>
+<tr>
+<td><code>x_span</code></td>
+<td><code>max(x) - min(x)</code></td>
+</tr>
+<tr>
+<td><code>estimated_change</code></td>
+<td><code>slope × x_span</code>，整个窗口内的估计变化量</td>
+</tr>
+<tr>
+<td><code>change_low</code>、<code>change_high</code></td>
+<td>斜率置信区间换算成整个窗口内的变化量</td>
+</tr>
+</tbody>
+</table>
+<p>用于稳定判断时，不应只看 <code>has_trend</code>，还应设置具有物理意义的漂移容差：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>drift_tolerance <span class="token operator">=</span> <span class="token number">0.02</span>  <span class="token comment"># 允许窗口内最多变化 0.02 V</span>
+result <span class="token operator">=</span> theil_sen_test<span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+
+small_enough <span class="token operator">=</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>estimated_change<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> drift_tolerance
+</code></pre><h2 id="4-tost-等效性检验">4. TOST 等效性检验 </h2>
+<p>传统差异检验中的“没有显著差异”不等于“已经证明相等”。TOST（two one-sided tests）直接检验两组均值之差是否严格落在预先规定的等效区间内。</p>
+<p>本模块始终定义：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>mean_difference = mean(sample_b) - mean(sample_a)
+</code></pre><p>等效边界 <code>low</code> 和 <code>high</code> 必须由实验允许误差、仪器精度或工程需求预先确定，而不应仅根据当前数据临时设定。</p>
+<h3 id="tost_independent"><code>tost_independent()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>tost_independent<span class="token punctuation">(</span>
+    sample_a<span class="token punctuation">,</span>
+    sample_b<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    low<span class="token punctuation">,</span>
+    high<span class="token punctuation">,</span>
+    alpha<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    equal_var<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> TOSTResult
+</code></pre><p>用于两组相互独立的数据。例如两个器件、两次独立实验或来自不同样本的测量。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample_a</code>、<code>sample_b</code></td>
+<td>两个独立样本，每组至少 2 个有限值，样本数可以不同</td>
+</tr>
+<tr>
+<td><code>low</code>、<code>high</code></td>
+<td>均值差 <code>mean_b - mean_a</code> 的等效区间，要求 <code>low &lt; high</code></td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>显著性水平，默认 <code>0.05</code>，且必须小于 <code>0.5</code></td>
+</tr>
+<tr>
+<td><code>equal_var=False</code></td>
+<td>默认使用 Welch 方法，不假设两组方差相同</td>
+</tr>
+<tr>
+<td><code>equal_var=True</code></td>
+<td>使用合并方差；只有在共同方差假设合理时才使用</td>
+</tr>
+</tbody>
+</table>
+<p>示例：判断两批独立测量的平均值差是否在 ±0.2 内：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> tost_independent
+
+sample_a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10.00</span><span class="token punctuation">,</span> <span class="token number">10.10</span><span class="token punctuation">,</span> <span class="token number">9.90</span><span class="token punctuation">,</span> <span class="token number">10.05</span><span class="token punctuation">,</span> <span class="token number">9.95</span><span class="token punctuation">,</span> <span class="token number">10.02</span><span class="token punctuation">,</span> <span class="token number">9.98</span><span class="token punctuation">,</span> <span class="token number">10.03</span><span class="token punctuation">]</span>
+sample_b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10.02</span><span class="token punctuation">,</span> <span class="token number">10.08</span><span class="token punctuation">,</span> <span class="token number">9.94</span><span class="token punctuation">,</span> <span class="token number">10.06</span><span class="token punctuation">,</span> <span class="token number">9.97</span><span class="token punctuation">,</span> <span class="token number">10.01</span><span class="token punctuation">,</span> <span class="token number">10.00</span><span class="token punctuation">,</span> <span class="token number">10.04</span><span class="token punctuation">]</span>
+
+result <span class="token operator">=</span> tost_independent<span class="token punctuation">(</span>
+    sample_a<span class="token punctuation">,</span>
+    sample_b<span class="token punctuation">,</span>
+    low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0.2</span><span class="token punctuation">,</span>
+    high<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>equivalent<span class="token punctuation">)</span>       <span class="token comment"># True</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>method<span class="token punctuation">)</span>           <span class="token comment"># "independent-welch"</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>mean_difference<span class="token punctuation">)</span>  <span class="token comment"># 约 0.01125</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>p_value<span class="token punctuation">)</span>          <span class="token comment"># 约 5.19e-6</span>
+</code></pre><h3 id="tost_paired"><code>tost_paired()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>tost_paired<span class="token punctuation">(</span>
+    sample_a<span class="token punctuation">,</span>
+    sample_b<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    low<span class="token punctuation">,</span>
+    high<span class="token punctuation">,</span>
+    alpha<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> TOSTResult
+</code></pre><p>用于一一对应的成对数据。例如同一器件校准前后、同一设定点的两次重复扫描，或同一时间点由两种方法得到的结果。</p>
+<p>两组数据长度必须相同，并且相同位置的数据必须互相对应。</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> tost_paired
+
+before <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10.00</span><span class="token punctuation">,</span> <span class="token number">10.10</span><span class="token punctuation">,</span> <span class="token number">9.90</span><span class="token punctuation">,</span> <span class="token number">10.05</span><span class="token punctuation">,</span> <span class="token number">9.95</span><span class="token punctuation">,</span> <span class="token number">10.02</span><span class="token punctuation">,</span> <span class="token number">9.98</span><span class="token punctuation">,</span> <span class="token number">10.03</span><span class="token punctuation">]</span>
+after <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10.02</span><span class="token punctuation">,</span> <span class="token number">10.08</span><span class="token punctuation">,</span> <span class="token number">9.94</span><span class="token punctuation">,</span> <span class="token number">10.06</span><span class="token punctuation">,</span> <span class="token number">9.97</span><span class="token punctuation">,</span> <span class="token number">10.01</span><span class="token punctuation">,</span> <span class="token number">10.00</span><span class="token punctuation">,</span> <span class="token number">10.04</span><span class="token punctuation">]</span>
+
+result <span class="token operator">=</span> tost_paired<span class="token punctuation">(</span>
+    before<span class="token punctuation">,</span>
+    after<span class="token punctuation">,</span>
+    low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    high<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>equivalent<span class="token punctuation">)</span>       <span class="token comment"># True</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>method<span class="token punctuation">)</span>           <span class="token comment"># "paired"</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>mean_difference<span class="token punctuation">)</span>  <span class="token comment"># 约 0.01125</span>
+</code></pre><p><code>TOSTResult</code> 的主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>equivalent</code></td>
+<td>两个单侧检验是否都通过，即 <code>p_value &lt; alpha</code></td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td><code>"independent-welch"</code>、<code>"independent-pooled"</code> 或 <code>"paired"</code></td>
+</tr>
+<tr>
+<td><code>mean_a</code>、<code>mean_b</code></td>
+<td>两组样本均值</td>
+</tr>
+<tr>
+<td><code>mean_difference</code></td>
+<td><code>mean_b - mean_a</code></td>
+</tr>
+<tr>
+<td><code>equivalence_low</code>、<code>equivalence_high</code></td>
+<td>等效区间</td>
+</tr>
+<tr>
+<td><code>standard_error</code></td>
+<td>均值差的标准误差</td>
+</tr>
+<tr>
+<td><code>degrees_of_freedom</code></td>
+<td>t 检验自由度</td>
+</tr>
+<tr>
+<td><code>t_lower</code>、<code>p_lower</code></td>
+<td>针对下边界的单侧检验结果</td>
+</tr>
+<tr>
+<td><code>t_upper</code>、<code>p_upper</code></td>
+<td>针对上边界的单侧检验结果</td>
+</tr>
+<tr>
+<td><code>p_value</code></td>
+<td><code>max(p_lower, p_upper)</code>，TOST 的总体 p 值</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>显著性水平</td>
+</tr>
+<tr>
+<td><code>confidence_level</code></td>
+<td>等效置信区间的置信水平，即 <code>1 - 2 × alpha</code></td>
+</tr>
+<tr>
+<td><code>confidence_low</code>、<code>confidence_high</code></td>
+<td>均值差的等效置信区间</td>
+</tr>
+<tr>
+<td><code>samples_a</code>、<code>samples_b</code></td>
+<td>两组样本数</td>
+</tr>
+</tbody>
+</table>
+<p>当 <code>alpha=0.05</code> 时，返回的是 90% 置信区间。该区间严格位于 <code>(low, high)</code> 内，与 TOST 判断为等效是等价的。</p>
+<p>如果 <code>equivalent=False</code>，正确解释是“现有数据不足以证明两组在该容差内等效”，而不是已经证明两组不等效。样本太少、噪声太大或等效区间太窄都可能导致这一结果。</p>
+<h2 id="5-mad-鲁棒尺度函数">5. MAD 鲁棒尺度函数 </h2>
+<p>MAD 是 median absolute deviation，即中位数绝对偏差：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>MAD = median(abs(x - median(x)))
+</code></pre><p>与普通标准差相比，中位数和 MAD 不容易被少量极端值明显拉偏，适合含偶发尖峰的实验数据。</p>
+<h3 id="median_absolute_deviation"><code>median_absolute_deviation()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>median_absolute_deviation<span class="token punctuation">(</span>values<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">float</span>
+</code></pre><p>返回未缩放的 MAD，至少需要 1 个有限值。</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> median_absolute_deviation
+
+reference <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">0.99</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">0.98</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">]</span>
+mad <span class="token operator">=</span> median_absolute_deviation<span class="token punctuation">(</span>reference<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>mad<span class="token punctuation">)</span>  <span class="token comment"># 约 0.01</span>
+</code></pre><h3 id="robust_standard_deviation"><code>robust_standard_deviation()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>robust_standard_deviation<span class="token punctuation">(</span>values<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">float</span>
+</code></pre><p>返回：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>robust_std = 1.4826022185 × MAD
+</code></pre><p>对于近似正态分布的噪声，这一缩放使结果可按普通标准差的尺度解释。</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> robust_standard_deviation
+
+reference <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">0.99</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">0.98</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">]</span>
+noise_std <span class="token operator">=</span> robust_standard_deviation<span class="token punctuation">(</span>reference<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>noise_std<span class="token punctuation">)</span>  <span class="token comment"># 约 0.01483</span>
+</code></pre><p>如果数据几乎完全相同，MAD 可能等于零。此时不应简单地把任何非零偏差都当作尖峰；在尖峰检测函数中应设置 <code>absolute_tolerance</code>。</p>
+<h2 id="6-单个新测量值的-mad-检测">6. 单个新测量值的 MAD 检测 </h2>
+<h3 id="mad_outlier_test"><code>mad_outlier_test()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>mad_outlier_test<span class="token punctuation">(</span>
+    value<span class="token punctuation">,</span>
+    reference<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> MADPointResult
+</code></pre><p>该函数使用一段参考数据判断一个新值是否为异常点。判定条件为：</p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>abs(value - median) &gt; max(
+    threshold × 1.4826 × MAD,
+    absolute_tolerance,
+)
+</code></pre><p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>要判断的新测量值</td>
+</tr>
+<tr>
+<td><code>reference</code></td>
+<td>参考窗口，至少需要 3 个有限值</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>鲁棒标准差倍数，默认 <code>3.5</code></td>
+</tr>
+<tr>
+<td><code>absolute_tolerance</code></td>
+<td>最小绝对偏差门槛，默认 <code>0.0</code></td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> mad_outlier_test
+
+reference <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">0.99</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">0.98</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> mad_outlier_test<span class="token punctuation">(</span>
+    <span class="token number">1.80</span><span class="token punctuation">,</span>
+    reference<span class="token punctuation">,</span>
+    threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>is_outlier<span class="token punctuation">)</span>  <span class="token comment"># True</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>median<span class="token punctuation">)</span>      <span class="token comment"># 1.0</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>deviation<span class="token punctuation">)</span>   <span class="token comment"># 0.8</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>cutoff<span class="token punctuation">)</span>      <span class="token comment"># 约 0.05189</span>
+</code></pre><p><code>MADPointResult</code> 字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is_outlier</code></td>
+<td>新值是否超过判定门槛</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>被判断的测量值</td>
+</tr>
+<tr>
+<td><code>median</code></td>
+<td>参考窗口中位数</td>
+</tr>
+<tr>
+<td><code>mad</code></td>
+<td>参考窗口的未缩放 MAD</td>
+</tr>
+<tr>
+<td><code>robust_std</code></td>
+<td><code>1.4826 × MAD</code></td>
+</tr>
+<tr>
+<td><code>deviation</code></td>
+<td>新值到参考中位数的绝对偏差</td>
+</tr>
+<tr>
+<td><code>cutoff</code></td>
+<td>最终使用的门槛</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>鲁棒标准差倍数</td>
+</tr>
+<tr>
+<td><code>absolute_tolerance</code></td>
+<td>绝对偏差下限</td>
+</tr>
+<tr>
+<td><code>reference_samples</code></td>
+<td>参考样本数</td>
+</tr>
+</tbody>
+</table>
+<p>该函数适合在线测量：保留最近若干个可信值作为 <code>reference</code>，每次获得一个新读数后立即检查。</p>
+<h2 id="7-hampel-滑动窗口尖峰处理">7. Hampel 滑动窗口尖峰处理 </h2>
+<h3 id="hampel_filter"><code>hampel_filter()</code> </h3>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>hampel_filter<span class="token punctuation">(</span>
+    values<span class="token punctuation">,</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">11</span><span class="token punctuation">,</span>
+    threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>
+    replacement<span class="token operator">=</span><span class="token string">"median"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> HampelResult
+</code></pre><p>Hampel 方法在每个位置建立一个局部窗口，用局部中位数和局部 MAD 判断该点是否为孤立尖峰。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>values</code></td>
+<td>至少包含 3 个有限值的一维序列</td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>奇数且不小于 3；实验数据中常用 7～21</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>鲁棒标准差倍数，默认 <code>3.5</code></td>
+</tr>
+<tr>
+<td><code>absolute_tolerance</code></td>
+<td>最小绝对偏差门槛，可根据仪器噪声或分辨率设定</td>
+</tr>
+<tr>
+<td><code>replacement="median"</code></td>
+<td>用局部中位数替换尖峰</td>
+</tr>
+<tr>
+<td><code>replacement="nan"</code></td>
+<td>用 <code>NaN</code> 标记尖峰</td>
+</tr>
+<tr>
+<td><code>replacement="drop"</code></td>
+<td>从 <code>filtered</code> 中删除尖峰，因此输出长度可能改变</td>
+</tr>
+<tr>
+<td><code>replacement="none"</code></td>
+<td>只检测，不修改 <code>filtered</code> 中的数值</td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> hampel_filter
+
+values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">0.99</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">4.50</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">,</span> <span class="token number">0.98</span><span class="token punctuation">,</span> <span class="token number">1.01</span><span class="token punctuation">,</span> <span class="token number">1.00</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> hampel_filter<span class="token punctuation">(</span>
+    values<span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    threshold<span class="token operator">=</span><span class="token number">3.5</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.05</span><span class="token punctuation">,</span>
+    replacement<span class="token operator">=</span><span class="token string">"median"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>outlier_indices<span class="token punctuation">.</span>tolist<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># [4]</span>
+
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>filtered<span class="token punctuation">.</span>tolist<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># [1.0, 1.01, 0.99, 1.02, 1.01, 1.0, 0.98, 1.01, 1.0]</span>
+</code></pre><p><code>HampelResult</code> 的主要字段和属性：</p>
+<table>
+<thead>
+<tr>
+<th>字段或属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>original</code></td>
+<td>原始数据的 NumPy 数组副本</td>
+</tr>
+<tr>
+<td><code>filtered</code></td>
+<td>按 <code>replacement</code> 处理后的数组</td>
+</tr>
+<tr>
+<td><code>outlier_mask</code></td>
+<td>与原始数据等长的布尔掩码</td>
+</tr>
+<tr>
+<td><code>local_median</code></td>
+<td>每个位置的局部中位数</td>
+</tr>
+<tr>
+<td><code>local_mad</code></td>
+<td>每个位置的局部 MAD</td>
+</tr>
+<tr>
+<td><code>local_robust_std</code></td>
+<td>每个位置的 <code>1.4826 × MAD</code></td>
+</tr>
+<tr>
+<td><code>local_cutoff</code></td>
+<td>每个位置最终使用的判定门槛</td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>实际使用的窗口长度；数据较短时可能自动缩小</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>鲁棒标准差倍数</td>
+</tr>
+<tr>
+<td><code>absolute_tolerance</code></td>
+<td>绝对偏差门槛</td>
+</tr>
+<tr>
+<td><code>replacement</code></td>
+<td>输出处理方式</td>
+</tr>
+<tr>
+<td><code>outlier_indices</code></td>
+<td>所有尖峰位置的 NumPy 索引数组</td>
+</tr>
+<tr>
+<td><code>outlier_count</code></td>
+<td>检出的尖峰数量</td>
+</tr>
+</tbody>
+</table>
+<p>尖峰处理注意事项：</p>
+<ul>
+<li>Hampel 方法适合处理孤立尖峰，不适合把持续多个点的阶跃变化直接当作异常删除。</li>
+<li>连续多个异常点可能表示器件状态真实改变、量程切换或连接故障，应交给测量流程进一步判断。</li>
+<li>用于统计分析时，建议保留 <code>original</code> 和 <code>outlier_mask</code>，不要只保存处理后的数据。</li>
+<li>如果后续算法不能接受 <code>NaN</code>，不要直接把 <code>replacement="nan"</code> 的结果传给本模块的其他函数。</li>
+</ul>
+<h2 id="8-用于测量稳态判断的组合示例">8. 用于测量稳态判断的组合示例 </h2>
+<p>一个较稳妥的稳态判断通常包含三个不同问题：</p>
+<ol>
+<li>是否存在孤立尖峰？</li>
+<li>最近窗口是否仍有趋势或明显漂移？</li>
+<li>相邻两个窗口是否已经在工程容差内等效？</li>
+</ol>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> emeasure<span class="token punctuation">.</span>statistics <span class="token keyword keyword-import">import</span> <span class="token punctuation">(</span>
+    hampel_filter<span class="token punctuation">,</span>
+    mann_kendall_test<span class="token punctuation">,</span>
+    theil_sen_test<span class="token punctuation">,</span>
+    tost_independent<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+older_raw <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.002</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">,</span> <span class="token number">1.003</span><span class="token punctuation">,</span> <span class="token number">1.005</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">,</span> <span class="token number">1.003</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">]</span>
+newer_raw <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.005</span><span class="token punctuation">,</span> <span class="token number">1.003</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">,</span> <span class="token number">1.006</span><span class="token punctuation">,</span> <span class="token number">1.003</span><span class="token punctuation">,</span> <span class="token number">1.004</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 1. 清理两个窗口中的孤立尖峰。</span>
+older <span class="token operator">=</span> hampel_filter<span class="token punctuation">(</span>
+    older_raw<span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">.</span>filtered
+newer <span class="token operator">=</span> hampel_filter<span class="token punctuation">(</span>
+    newer_raw<span class="token punctuation">,</span>
+    window_size<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span>
+    absolute_tolerance<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">.</span>filtered
+
+<span class="token comment"># 2. 新窗口不能存在显著趋势，而且窗口内估计漂移必须足够小。</span>
+mk <span class="token operator">=</span> mann_kendall_test<span class="token punctuation">(</span>newer<span class="token punctuation">)</span>
+slope <span class="token operator">=</span> theil_sen_test<span class="token punctuation">(</span>newer<span class="token punctuation">)</span>
+no_trend <span class="token operator">=</span> <span class="token keyword keyword-not">not</span> mk<span class="token punctuation">.</span>has_trend
+small_drift <span class="token operator">=</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>slope<span class="token punctuation">.</span>estimated_change<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0.01</span>
+
+<span class="token comment"># 3. 两个窗口的均值差必须能够证明落在 ±0.01 内。</span>
+equivalence <span class="token operator">=</span> tost_independent<span class="token punctuation">(</span>
+    older<span class="token punctuation">,</span>
+    newer<span class="token punctuation">,</span>
+    low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+    high<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+is_stable <span class="token operator">=</span> no_trend <span class="token keyword keyword-and">and</span> small_drift <span class="token keyword keyword-and">and</span> equivalence<span class="token punctuation">.</span>equivalent
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>is_stable<span class="token punctuation">)</span>
+</code></pre><p>在真实测量流程中，通常还应要求上述条件连续满足两次或三次，并设置最大等待时间。这样可以降低一次偶然窗口造成误判的概率。</p>
+<h2 id="9-常见选择建议">9. 常见选择建议 </h2>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>建议函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断数据是否仍持续上升或下降</td>
+<td><code>mann_kendall_test()</code></td>
+</tr>
+<tr>
+<td>估计每秒或每个采样点的漂移速度</td>
+<td><code>theil_sen_test()</code></td>
+</tr>
+<tr>
+<td>判断两个独立测量窗口是否足够接近</td>
+<td><code>tost_independent()</code></td>
+</tr>
+<tr>
+<td>判断同一批对象前后测量是否足够接近</td>
+<td><code>tost_paired()</code></td>
+</tr>
+<tr>
+<td>估计不易受尖峰影响的噪声尺度</td>
+<td><code>robust_standard_deviation()</code></td>
+</tr>
+<tr>
+<td>在线判断一个新读数是否为尖峰</td>
+<td><code>mad_outlier_test()</code></td>
+</tr>
+<tr>
+<td>批量检测并处理整段序列的尖峰</td>
+<td><code>hampel_filter()</code></td>
+</tr>
+</tbody>
+</table>
+<p>统计判断应与实验允许误差结合使用。<code>alpha</code>、等效边界、漂移容差、<code>absolute_tolerance</code> 和窗口长度最好在正式测量前根据仪器噪声、采样周期和待测器件的时间常数确定。</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
