@@ -11,7 +11,7 @@ from typing import Literal, Protocol, TypeAlias
 
 import numpy as np
 
-from ...statistics import (
+from ..statistics import (
     MannKendallResult,
     TOSTResult,
     TheilSenResult,
@@ -21,8 +21,8 @@ from ...statistics import (
     tost_independent,
 )
 
-from .._exceptions import MeasurementReadError, StabilityTimeoutError
-from .._timing import (
+from ._exceptions import MeasurementReadError, StabilityTimeoutError
+from ._timing import (
     CancellationEvent,
     _raise_if_cancelled,
     _sleep_until,
