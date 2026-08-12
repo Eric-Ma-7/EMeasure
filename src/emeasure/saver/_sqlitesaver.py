@@ -1,6 +1,7 @@
 import json
 import sqlite3
 import time
+from collections.abc import Iterable, Iterator
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -220,6 +221,57 @@ class SqliteSaver:
         '''
         self.conn.execute(sql, values)
 
+    def _iter_normalized_rows(
+        self,
+        rows: Iterable[dict[str, Any]],
+        keys_in_order: tuple[str, ...],
+    ) -> Iterator[tuple[Any, ...]]:
+        """
+        Validate and normalize rows lazily for ``executemany()``.
+
+        Lazy conversion avoids making a second in-memory copy of a large
+        batch. Validation errors are raised inside the surrounding transaction,
+        so any rows already processed by SQLite are rolled back.
+        """
+        expected_keys = set(keys_in_order)
+
+        for index, data in enumerate(rows):
+            if not isinstance(data, dict):
+                raise TypeError(f"`rows[{index}]` must be a dictionary.")
+            if not data:
+                raise ValueError(f"`rows[{index}]` cannot be empty.")
+
+            current_keys = tuple(data.keys())
+            if set(current_keys) != expected_keys:
+                raise ValueError(
+                    f"Data keys in rows[{index}] do not match the first inserted row.\n"
+                    f"Expected keys: {keys_in_order}\n"
+                    f"Got keys:      {current_keys}"
+                )
+
+            yield tuple(self._normalize_value(data[key]) for key in keys_in_order)
+
+    def _insert_many(
+        self,
+        table_name: str,
+        keys_in_order: tuple[str, ...],
+        rows: Iterable[dict[str, Any]],
+    ) -> None:
+        """
+        Insert multiple rows using one ``executemany()`` call.
+        """
+        columns = ", ".join(f'"{key}"' for key in keys_in_order)
+        placeholders = ", ".join("?" for _ in keys_in_order)
+
+        sql = f'''
+        INSERT INTO "{table_name}" ({columns})
+        VALUES ({placeholders})
+        '''
+        self.conn.executemany(
+            sql,
+            self._iter_normalized_rows(rows, keys_in_order),
+        )
+
     def add(self, data: dict[str, Any]) -> None:
         """
         Add one row of data.
@@ -272,6 +324,71 @@ class SqliteSaver:
 
         try:
             self._insert_row(self.table_name, self._data_keys, data)
+            self.conn.commit()
+        except Exception:
+            self.conn.rollback()
+            raise
+
+    def add_many(self, rows: Iterable[dict[str, Any]]) -> None:
+        """
+        Add multiple rows in one atomic transaction.
+
+        ``rows`` may be any iterable of dictionaries, including a generator.
+        The first row defines the table schema when the experiment has not yet
+        been registered. Every row must contain the same set of keys; key order
+        may differ.
+
+        The whole batch is committed once. If validation or insertion of any
+        row fails, the whole batch is rolled back. An empty iterable is rejected
+        and does not register the experiment.
+        """
+        try:
+            row_iterator = iter(rows)
+        except TypeError as exc:
+            raise TypeError("`rows` must be an iterable of dictionaries.") from exc
+
+        try:
+            first_row = next(row_iterator)
+        except StopIteration as exc:
+            raise ValueError("`rows` cannot be empty.") from exc
+
+        if not isinstance(first_row, dict):
+            raise TypeError("`rows[0]` must be a dictionary.")
+        if not first_row:
+            raise ValueError("`rows[0]` cannot be empty.")
+
+        def all_rows() -> Iterator[dict[str, Any]]:
+            yield first_row
+            yield from row_iterator
+
+        if not self._registered:
+            table_name, start_time = self._generate_table_name_and_start_time()
+
+            try:
+                self.conn.execute("BEGIN")
+
+                keys_in_order = self._create_data_table(table_name, first_row)
+                self._register_experiment(start_time, table_name)
+                self._insert_many(table_name, keys_in_order, all_rows())
+
+                self.conn.commit()
+
+            except Exception:
+                self.conn.rollback()
+                raise
+
+            self.table_name = table_name
+            self.start_time = start_time
+            self._data_keys = keys_in_order
+            self._registered = True
+            return
+
+        assert self.table_name is not None
+        assert self._data_keys is not None
+
+        try:
+            self.conn.execute("BEGIN")
+            self._insert_many(self.table_name, self._data_keys, all_rows())
             self.conn.commit()
         except Exception:
             self.conn.rollback()
