@@ -16,7 +16,7 @@ import time
 import asyncio
 import numpy as np
 
-__all__ = ["NF5650", "NF5650Array"]
+__all__ = ["NF5640", "NF5650", "NF5650Array"]
 
 
 class NF5650(BaseInstrument):
@@ -512,10 +512,10 @@ class NF5650(BaseInstrument):
             self.set_secPSD_osc_freq(config["SOURCE_SEC_OSC_FREQ"])
         if "OSC_OUTPUT_PSD" in config:
             self.set_osc_output_PSD(config["OSC_OUTPUT_PSD"])
-        if "OSC_RANGE" in config:
-            self.set_osc_range(config["OSC_RANGE"])
         if "OSC_VOLT" in config:
             self.set_osc_volt(config["OSC_VOLT"])
+        if "OSC_RANGE" in config:
+            self.set_osc_range(config["OSC_RANGE"])
         if "AUXOUT1_VOLT" in config:
             self.set_auxout1_volt(config["AUXOUT1_VOLT"])
         if "AUXOUT2_VOLT" in config:
@@ -798,6 +798,145 @@ class NF5650(BaseInstrument):
         dV = self._as_float(dV, "AUX OUT ramp step")
         if abs(dV) < 0.001:
             raise InstrumentParameterError("AUX OUT ramp step must be at least 0.001 V.")
+
+
+class NF5640(BaseInstrument):
+    """Minimal NF LI5640 lock-in amplifier driver.
+
+    The driver implements measurement fetching, configurable ``OTYP`` fields,
+    and internal-oscillator amplitude setting.
+
+    ``otyp`` accepts either LI5640 numeric codes or their string names. The
+    order is preserved and determines the order of values returned by
+    ``fetch()``.
+    """
+
+    _OTYP_CODES = {
+        "LINE": 0,
+        "LINE_NUMBER": 0,
+        "DATA1": 1,
+        "DATA2": 2,
+        "FREQ": 3,
+        "SENS": 4,
+        "SENSITIVITY": 4,
+        "OVER": 5,
+        "OVERLEVEL": 5,
+        "STATUS": 5,
+    }
+    _OSC_RANGES = (0.05, 0.5, 5.0)
+
+    def __init__(
+        self,
+        visa_address: str,
+        rm=None,
+        *,
+        otyp: Sequence[str | int] = ("DATA1", "DATA2"),
+    ) -> None:
+        super().__init__(visa_address, rm)
+        self._otyp = self._validate_otyp(otyp)
+
+    def connect(self) -> None:
+        """Connect and configure ASCII termination and DOUT fields."""
+        super().connect()
+        res = self._require_session()
+        res.read_termination = "\n"
+        res.write_termination = "\n"
+        self._write_otyp()
+
+    @property
+    def otyp(self) -> tuple[int, ...]:
+        """Return the locally configured LI5640 OTYP codes."""
+        return self._otyp
+
+    def set_otyp(self, otyp: Sequence[str | int]) -> None:
+        """Set the fields and field order returned by ``fetch()``.
+
+        Supported fields are ``LINE``/0, ``DATA1``/1, ``DATA2``/2,
+        ``FREQ``/3, ``SENSITIVITY``/4, and ``OVERLEVEL``/5. The LI5640
+        permits one to six fields and also permits repeated fields.
+        """
+        self._otyp = self._validate_otyp(otyp)
+        if self.is_connected:
+            self._write_otyp()
+
+    def fetch(self) -> tuple[float, ...]:
+        """Return the latest values in the configured ``OTYP`` order."""
+        resp = self.query("DOUT?").strip()
+        try:
+            values = tuple(float(item.strip()) for item in resp.split(","))
+        except Exception as e:
+            raise InstrumentParseError(
+                f"Failed to parse DOUT? response: {resp!r}"
+            ) from e
+
+        if len(values) != len(self._otyp):
+            raise InstrumentResponseError(
+                f"DOUT? returned {len(values)} values, but {len(self._otyp)} "
+                f"values are expected for OTYP {self._otyp!r}: {resp!r}"
+            )
+
+        return values
+
+    def set_osc_volt(self, Vrms: float) -> None:
+        """Set OSC OUT amplitude in Vrms and select the smallest valid range."""
+        try:
+            Vrms = float(Vrms)
+        except (TypeError, ValueError) as e:
+            raise InstrumentParameterError(
+                f"OSC OUT voltage must be a finite number, got {Vrms!r}."
+            ) from e
+
+        if not np.isfinite(Vrms) or Vrms < 0.0 or Vrms > 5.0:
+            raise InstrumentParameterError(
+                f"OSC OUT voltage must be in [0, 5] Vrms, got {Vrms!r}."
+            )
+
+        range_code = next(
+            code for code, upper in enumerate(self._OSC_RANGES) if Vrms <= upper
+        )
+        self.write(f"AMPL {Vrms:.6g},{range_code}")
+
+    def _write_otyp(self) -> None:
+        self.write("OTYP " + ",".join(str(code) for code in self._otyp))
+
+    @classmethod
+    def _validate_otyp(cls, otyp: Sequence[str | int]) -> tuple[int, ...]:
+        if isinstance(otyp, (str, bytes)):
+            raise InstrumentParameterError(
+                "OTYP must be a sequence such as ['DATA1', 'FREQ'], not a string."
+            )
+
+        try:
+            items = tuple(otyp)
+        except TypeError as e:
+            raise InstrumentParameterError("OTYP must be an iterable sequence.") from e
+
+        if not 1 <= len(items) <= 6:
+            raise InstrumentParameterError("OTYP must contain between 1 and 6 fields.")
+
+        codes: list[int] = []
+        for item in items:
+            if isinstance(item, str):
+                token = item.strip().upper()
+                if token not in cls._OTYP_CODES:
+                    raise InstrumentParameterError(
+                        f"Invalid OTYP field {item!r}. Valid names are "
+                        f"{sorted(cls._OTYP_CODES)}."
+                    )
+                code = cls._OTYP_CODES[token]
+            elif isinstance(item, (int, np.integer)) and not isinstance(item, bool):
+                code = int(item)
+                if code < 0 or code > 5:
+                    raise InstrumentParameterError(
+                        f"OTYP numeric code must be in [0, 5], got {item!r}."
+                    )
+            else:
+                raise InstrumentParameterError(
+                    f"OTYP field must be a string name or integer code, got {item!r}."
+                )
+            codes.append(code)
+
+        return tuple(codes)
 
 
 class NF5650Array:
